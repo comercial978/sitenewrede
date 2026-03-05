@@ -1034,7 +1034,7 @@
 
                     <div class="contact-detail">
                         <div class="icon-wrap">✉️</div>
-                        <span>comercial@uaisoftware.com.br</span>
+                        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a6aaa8a0b7a6aca4a985b0a4acb6aaa3b1b2a4b7a0eba6aaa8eba7b7">[email&#160;protected]</a></span>
                     </div>
                     <div class="contact-detail">
                         <div class="icon-wrap">📞</div>
@@ -1105,10 +1105,14 @@
                         </button>
                     </form>
 
-                    <!-- FALLBACK: botão mailto gerado por JS -->
-                    <a href="#" id="btnMailto" class="btn-mailto" aria-label="Enviar por cliente de e-mail">
+                    <!-- INÍCIO fallback profissional -->
+                    <a href="#"
+                       id="fallbackEmail"
+                       class="btn-mailto"
+                       aria-label="Abrir cliente de e-mail com os dados preenchidos">
                         ✉️ Fallback: Enviar por e-mail
                     </a>
+                    <!-- FIM fallback profissional -->
 
                     <!-- Mensagem de sucesso (exibida via JS quando ?enviado=1 na URL) -->
                     <div id="obrigado" role="alert" aria-live="polite">
@@ -1124,7 +1128,7 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <p>&copy; 2026 UAI Software — Gestão Profissional de Redes Sociais. Todos os direitos reservados.</p>
-        <p style="margin-top:6px;"><a href="mailto:comercial@uaisoftware.com.br">comercial@uaisoftware.com.br</a></p>
+        <p style="margin-top:6px;"><a href="/cdn-cgi/l/email-protection#d0b3bfbdb5a2b3b9b1bc90a5b1b9a3bfb6a4a7b1a2b5feb3bfbdfeb2a2"><span class="__cf_email__" data-cfemail="23404c4e4651404a424f6356424a504c4557544251460d404c4e0d4151">[email&#160;protected]</span></a></p>
     </footer>
 
     <!-- ===== WHATSAPP FLOAT ===== -->
@@ -1147,7 +1151,7 @@
             • exibe #obrigado quando URL contém ?enviado=1
             • monta botão mailto fallback com JS lendo os campos do form
          ===================================================================== -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ----- 1) NAVBAR -----
 
         // Hamburger mobile
@@ -1212,25 +1216,49 @@
             obrigado.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Fallback mailto: monta href dinâmico ao clicar
-        document.getElementById('btnMailto').addEventListener('click', function (e) {
+        // =====================================================================
+        // INÍCIO fallback profissional
+        // Lê os campos do formulário pelos atributos name, monta subject + body
+        // com encodeURIComponent e abre o cliente de e-mail via window.location.href.
+        // Funciona mesmo com campos vazios. NÃO interfere no FormSubmit.
+        // =====================================================================
+        document.getElementById('fallbackEmail').addEventListener('click', function (e) {
             e.preventDefault();
-            const nome     = document.getElementById('nome').value.trim();
-            const email    = document.getElementById('email').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-            const assunto  = document.getElementById('assunto').value.trim();
-            const mensagem = document.getElementById('mensagem').value.trim();
 
-            const subject  = encodeURIComponent(assunto || 'Contato via site — UAI Software');
-            const body     = encodeURIComponent(
-                `Nome: ${nome || '—'}\n` +
-                `E-mail: ${email || '—'}\n` +
-                `Telefone: ${telefone || '—'}\n\n` +
-                `Mensagem:\n${mensagem || '—'}`
+            // Leitura segura — usa querySelector por name, retorna '' se campo não existir
+            function val(selector) {
+                var el = document.querySelector(selector);
+                return el ? el.value.trim() : '';
+            }
+
+            var nome     = val('input[name="Nome"]')     || val('input[name="nome"]');
+            var email    = val('input[name="Email"]')    || val('input[name="email"]');
+            var telefone = val('input[name="Telefone"]') || val('input[name="telefone"]')
+                                                         || val('input[name="whatsapp"]')
+                                                         || val('input[name="phone"]');
+            var assunto  = val('input[name="Assunto"]')  || val('input[name="assunto"]')
+                                                         || val('select[name="Assunto"]');
+            var mensagem = val('textarea[name="Mensagem"]') || val('textarea[name="mensagem"]');
+
+            var subject = encodeURIComponent(
+                assunto || 'Contato via site — UAI Software'
             );
 
-            window.location.href = `mailto:comercial@uaisoftware.com.br?subject=${subject}&body=${body}`;
+            // Body com quebras de linha (%0A = nova linha em mailto)
+            var body = encodeURIComponent(
+                'Nome: '     + (nome     || '—') + '\n' +
+                'Email: '    + (email    || '—') + '\n' +
+                'Telefone: ' + (telefone || '—') + '\n\n' +
+                'Mensagem:\n'+ (mensagem || '—')
+            );
+
+            window.location.href =
+                'mailto:comercial@uaisoftware.com.br' +
+                '?subject=' + subject +
+                '&body='    + body;
         });
+        // FIM fallback profissional
+        // =====================================================================
     </script>
 
 </body>

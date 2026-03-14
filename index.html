@@ -229,7 +229,6 @@
 
         /* ===== MOBILE NAV ===== */
         .mobile-nav {
-            display: none;
             position: fixed;
             top: 64px;
             left: 0; right: 0;
@@ -240,12 +239,15 @@
             z-index: 999;
             transform: translateY(-8px);
             opacity: 0;
-            transition: opacity var(--transition), transform var(--transition);
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
         }
 
         .mobile-nav.open {
-            display: block;
             opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
             transform: translateY(0);
         }
 

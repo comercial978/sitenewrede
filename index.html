@@ -856,21 +856,6 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .mobile-nav {
-                width: 100%;
-                max-height: calc(100vh - 64px);
-                overflow-y: auto;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-nav {
-                display: none !important;
-            }
-        }
-
-        body.menu-open {
-            overflow: hidden;
         }
     </style>
 </head>
@@ -1275,79 +1260,55 @@
             • monta botão mailto fallback com JS lendo os campos do form
          ===================================================================== -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // ----- 1) NAVBAR -----
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileSolBtn = document.getElementById('mobileSolBtn');
-            const mobileSubmenu = document.getElementById('mobileSubmenu');
-            const solDropdown = document.getElementById('solDropdown');
-            const solBtn = document.getElementById('solBtn');
+        // ----- 1) NAVBAR -----
 
-            function closeMobileMenu() {
-                if (!mobileNav || !hamburger) return;
+        // Hamburger mobile
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav  = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            const open = mobileNav.classList.toggle('open');
+            hamburger.classList.toggle('active', open);
+            hamburger.setAttribute('aria-expanded', open);
+        });
+
+        // Fechar mobile nav ao clicar em link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
                 mobileNav.classList.remove('open');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
-            }
-
-            if (hamburger && mobileNav) {
-                hamburger.addEventListener('click', function () {
-                    const open = mobileNav.classList.toggle('open');
-                    hamburger.classList.toggle('active', open);
-                    hamburger.setAttribute('aria-expanded', String(open));
-                    document.body.classList.toggle('menu-open', open);
-                });
-            }
-
-            document.querySelectorAll('.mobile-link').forEach(function (link) {
-                link.addEventListener('click', closeMobileMenu);
             });
+        });
 
-            if (mobileSolBtn && mobileSubmenu) {
-                function toggleMobileSubmenu() {
-                    const open = mobileSubmenu.classList.toggle('open');
-                    mobileSolBtn.classList.toggle('open', open);
-                    mobileSolBtn.setAttribute('aria-expanded', String(open));
-                }
+        // Mobile submenu "Soluções"
+        const mobileSolBtn  = document.getElementById('mobileSolBtn');
+        const mobileSubmenu = document.getElementById('mobileSubmenu');
 
-                mobileSolBtn.addEventListener('click', toggleMobileSubmenu);
-                mobileSolBtn.addEventListener('keydown', function (e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleMobileSubmenu();
-                    }
-                });
+        mobileSolBtn.addEventListener('click', () => {
+            const open = mobileSubmenu.classList.toggle('open');
+            mobileSolBtn.classList.toggle('open', open);
+            mobileSolBtn.setAttribute('aria-expanded', open);
+        });
+
+        // Keyboard nav para dropdown desktop
+        const solDropdown = document.getElementById('solDropdown');
+        const solBtn      = document.getElementById('solBtn');
+
+        solBtn.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                solDropdown.classList.toggle('open');
+                solBtn.setAttribute('aria-expanded', solDropdown.classList.contains('open'));
             }
+        });
 
-            if (solBtn && solDropdown) {
-                solBtn.addEventListener('keydown', function (e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        solDropdown.classList.toggle('open');
-                        solBtn.setAttribute('aria-expanded', String(solDropdown.classList.contains('open')));
-                    }
-                });
-
-                document.addEventListener('click', function (e) {
-                    if (!solDropdown.contains(e.target)) {
-                        solDropdown.classList.remove('open');
-                        solBtn.setAttribute('aria-expanded', 'false');
-                    }
-                });
+        document.addEventListener('click', e => {
+            if (!solDropdown.contains(e.target)) {
+                solDropdown.classList.remove('open');
+                solBtn.setAttribute('aria-expanded', 'false');
             }
-
-            window.addEventListener('resize', function () {
-                if (window.innerWidth > 768) {
-                    closeMobileMenu();
-                    if (mobileSubmenu && mobileSolBtn) {
-                        mobileSubmenu.classList.remove('open');
-                        mobileSolBtn.classList.remove('open');
-                        mobileSolBtn.setAttribute('aria-expanded', 'false');
-                    }
-                }
-            });
+        });
 
         // ----- 2) FORMULÁRIO -----
 
@@ -1372,7 +1333,6 @@
         document.getElementById('fallbackEmail').addEventListener('click', function (e) {
             e.preventDefault();
 
-            // Leitura segura — usa querySelector por name, retorna '' se campo não existir
             function val(selector) {
                 var el = document.querySelector(selector);
                 return el ? el.value.trim() : '';
@@ -1387,12 +1347,37 @@
                                                          || val('select[name="Assunto"]');
             var mensagem = val('textarea[name="Mensagem"]') || val('textarea[name="mensagem"]');
 
-            var subject = encodeURIComponent(
-                assunto || 'Contato via site — UAI Software'
+            var subject = encodeURIComponent(assunto || 'Contato via site — UAI Software');
+            var body = encodeURIComponent(
+                'Nome: ' + (nome || '—') + '\n' +
+                'Email: ' + (email || '—') + '\n' +
+                'Telefone: ' + (telefone || '—') + '\n' +
+                'Assunto: ' + (assunto || '—') + '\n\n' +
+                'Mensagem:\n' + (mensagem || '—')
             );
 
-            // Body com quebras de linha (%0A = nova linha em mailto)
-            var body = encodeURIComponent(
-                'Nome: '     + (nome     || '—') + '\n' +
-                'Email: '    + (email    || '—') + '\n' +
-                'Telefone: ' + (telefone || '—') + '\n\n' +
+            window.location.href = 'mailto:comercial@uaisoftware.com.br?subject=' + subject + '&body=' + body;
+        });
+
+        // Melhora a acessibilidade do submenu mobile via teclado
+        mobileSolBtn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                mobileSolBtn.click();
+            }
+        });
+
+        // Fecha o menu mobile ao redimensionar para desktop
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                mobileNav.classList.remove('open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileSubmenu.classList.remove('open');
+                mobileSolBtn.classList.remove('open');
+                mobileSolBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+</body>
+</html>

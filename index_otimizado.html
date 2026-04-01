@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação de Sites, Landing Pages e Automação | UAI Software</title>
+    <meta name="description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas. Solicite uma análise do seu site com a UAI Software.">
+
+    <link rel="canonical" href="https://uaisoftware.com.br/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="UAI Software">
+    <meta property="og:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
+    <meta property="og:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas. Solicite uma análise do seu site com a UAI Software.">
+    <meta property="og:url" content="https://uaisoftware.com.br/">
+    <meta property="og:image" content="https://uaisoftware.com.br/assets/uai-software-logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
+    <meta name="twitter:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.">
+    <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.png">
+
+    <!-- Google Fonts: tipografia elegante e moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ73CGV7X7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QZ73CGV7X7');
+</script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple-dark:  #4c3bc4;
+            --purple-mid:   #667eea;
+            --purple-light: #764ba2;
+            --accent:       #a78bfa;
+            --text-dark:    #1a1a2e;
+            --text-body:    #444;
+            --text-muted:   #6b6b8a;
+            --bg-light:     #f7f7fb;
+            --bg-card:      #ffffff;
+            --green-wa:     #25D366;
+            --radius-lg:    18px;
+            --radius-md:    10px;
+            --shadow-sm:    0 4px 16px rgba(102,126,234,.12);
+            --shadow-md:    0 12px 40px rgba(102,126,234,.18);
+            --transition:   .28s cubic-bezier(.4,0,.2,1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-body);
+            background: #fff;
+            overflow-x: hidden;
+            line-height: 1.65;
+        }
+
+        /* ===== ACESSIBILIDADE: FOCO VISÍVEL ===== */
+        :focus-visible {
+            outline: 3px solid var(--purple-mid);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* =========================================================
+           NAVBAR
+           ADICIONADO: item "Soluções" com dropdown (desktop e mobile)
+           ========================================================= */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(102,126,234,.1);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--purple-dark);
+            text-decoration: none;
+            letter-spacing: -.3px;
+        }
+
+        /* Nav links — desktop */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 8px 14px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: .93rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: rgba(102,126,234,.09);
+            color: var(--purple-dark);
+        }
+
+        /* ===== MENU "SOLUÇÕES" — DROPDOWN ===== */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        /* Seta chevron */
+        .nav-dropdown > a::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform var(--transition);
+        }
+
+        .nav-dropdown:hover > a::after,
+        .nav-dropdown.open > a::after {
+            transform: rotate(-135deg) translateY(-2px);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background: #fff;
+            border: 1px solid rgba(102,126,234,.14);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            min-width: 240px;
+            padding: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity var(--transition), transform var(--transition);
+        }
+
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown.open .dropdown-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* ===== LINKS DE SOLUÇÕES =====
+           target="_blank" e rel="noopener noreferrer" estão no HTML abaixo
+        */
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: var(--text-dark);
+            font-size: .9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background var(--transition);
+        }
+
+        .dropdown-menu a:hover { background: rgba(102,126,234,.08); }
+
+        .dropdown-menu a .icon {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .9rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== NAV CTA ===== */
+        .nav-cta {
+            padding: 9px 20px;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            color: #fff !important;
+            border-radius: 50px;
+            font-weight: 700 !important;
+            font-size: .88rem !important;
+        }
+
+        .nav-cta:hover { opacity: .88; background: none; }
+
+        /* ===== HAMBURGER — MOBILE ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px; height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: transform var(--transition), opacity var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0; right: 0;
+            background: #fff;
+            border-top: 1px solid rgba(102,126,234,.1);
+            padding: 16px 24px 24px;
+            box-shadow: 0 12px 30px rgba(0,0,0,.08);
+            z-index: 999;
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity var(--transition), transform var(--transition);
+        }
+
+        .mobile-nav.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-nav ul { list-style: none; }
+
+        .mobile-nav ul li { border-bottom: 1px solid rgba(102,126,234,.07); }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 13px 4px;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: .97rem;
+            text-decoration: none;
+        }
+
+        /* ===== MOBILE SUBMENU "SOLUÇÕES" ===== */
+        .mobile-solucoes-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 4px;
+            font-weight: 700;
+            font-size: .97rem;
+            cursor: pointer;
+            color: var(--purple-dark);
+        }
+
+        .mobile-solucoes-toggle::after {
+            content: '＋';
+            font-size: 1.1rem;
+            transition: transform var(--transition);
+        }
+
+        .mobile-solucoes-toggle.open::after { content: '−'; }
+
+        .mobile-submenu {
+            display: none;
+            padding: 4px 0 12px 16px;
+        }
+
+        .mobile-submenu.open { display: block; }
+
+        .mobile-submenu a {
+            font-size: .9rem !important;
+            padding: 8px 4px !important;
+            color: var(--text-muted) !important;
+        }
+
+
+        /* ===== SOBRE ===== */
+        #sobre { background: #fff; }
+        #sobre .sobre-layout {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            max-width: 860px;
+            margin: 48px auto 0;
+        }
+        #sobre .sobre-logo-box { flex: 0 0 auto; text-align: center; }
+        #sobre .sobre-logo-box img { width: 220px; max-width: 100%; }
+        #sobre .sobre-intro { flex: 1; min-width: 240px; }
+        #sobre .sobre-pilares {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        #sobre .pilar-card {
+            border-top: 3px solid var(--purple-mid);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            background: var(--bg-light);
+        }
+        #sobre .pilar-card.apoio { border-top-color: var(--purple-light); }
+        #sobre .pilar-card.info  { border-top-color: var(--accent); }
+        #sobre .pilar-card .pilar-icon { font-size: 1.6rem; margin-bottom: 10px; }
+        #sobre .pilar-card h3 { font-size: 1rem; font-weight: 700; color: var(--purple-dark); margin-bottom: 6px; }
+        #sobre .pilar-card.apoio h3 { color: var(--purple-light); }
+        #sobre .pilar-card.info  h3 { color: var(--accent); }
+        #sobre .pilar-card p { font-size: .9rem; color: var(--text-body); }
+        #sobre .sobre-texto-extra {
+            font-size: 1rem; line-height: 1.85; color: var(--text-body);
+            display: flex; flex-direction: column; gap: 16px;
+            margin: 36px auto 0; max-width: 860px;
+        }
+        @media (max-width:600px) { #sobre .sobre-layout { flex-direction: column; } }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: clamp(80px, 12vw, 140px) 24px clamp(80px, 10vw, 120px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.07)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .hero-inner { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,.18);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            animation: fadeInDown .8s ease both;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            animation: fadeInDown .9s ease both;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 36px;
+            opacity: .92;
+            animation: fadeInUp 1s ease both;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.1s ease both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 36px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0,0,0,.28);
+        }
+
+        .cta-outline {
+            display: inline-block;
+            padding: 14px 36px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,.6);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+
+        .cta-outline:hover {
+            background: rgba(255,255,255,.12);
+            transform: translateY(-3px);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: clamp(56px, 8vw, 96px) 24px;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+            margin-bottom: 14px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 560px;
+            margin: 0 auto 52px;
+        }
+
+        .section-divider {
+            display: block;
+            width: 56px; height: 4px;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            border-radius: 2px;
+            margin: 14px auto 0;
+        }
+
+        /* ===== BENEFITS ===== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            padding: 36px 28px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1.5px solid transparent;
+            transition: all var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(102,126,234,.3);
+        }
+
+        .benefit-icon { font-size: 2.4rem; margin-bottom: 16px; }
+
+        .benefit-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--purple-dark);
+            font-weight: 700;
+        }
+
+        .benefit-card p { color: var(--text-muted); font-size: .95rem; }
+
+        /* ===== SERVICES ===== */
+        .services { background: var(--bg-light); }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .service-item {
+            background: var(--bg-card);
+            padding: 26px 22px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: all var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-item:hover {
+            transform: scale(1.04);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-item h4 { color: var(--purple-dark); margin-bottom: 8px; font-size: 1rem; }
+        .service-item p { color: var(--text-muted); font-size: .88rem; }
+
+        /* ===== STATS ===== */
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: clamp(56px, 8vw, 88px) 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 36px;
+            text-align: center;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .stat-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 8px;
+        }
+
+        .stat-item p { font-size: 1rem; opacity: .88; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials { background: var(--bg-light); }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            padding: 36px 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--purple-mid);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-body);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--purple-dark);
+            font-size: .9rem;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: clamp(64px, 10vw, 100px) 24px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            margin-bottom: 14px;
+        }
+
+        .cta-section p { font-size: 1.05rem; opacity: .9; margin-bottom: 34px; }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .whatsapp-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: var(--green-wa);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,.2);
+        }
+
+        .whatsapp-cta-btn:hover {
+            background: #1ebe5d;
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-cta-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+        /* =========================================================
+           SEÇÃO DE CONTATO
+           FUNCIONAMENTO DO ENVIO:
+           • Principal: FormSubmit (https://formsubmit.co/) — envia direto para comercial@uaisoftware.com.br sem backend.
+             Inclui honeypot anti-spam (_honey) e campo _captcha desativado (usa redirect próprio).
+             Após o envio, FormSubmit redireciona para #obrigado (âncora de sucesso) via _next.
+           • Fallback: botão "Enviar por e-mail" monta um link mailto: com JS preenchendo subject e body.
+           ========================================================= */
+        #contato { background: var(--bg-light); }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 56px;
+            align-items: start;
+        }
+
+        @media (max-width: 820px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 36px; }
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: .97rem;
+            margin-bottom: 28px;
+            line-height: 1.75;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: .94rem;
+            color: var(--text-body);
+        }
+
+        .contact-detail .icon-wrap {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: clamp(28px, 5vw, 44px);
+        }
+
+        /* ===== FORM STYLES ===== */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 500px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        label {
+            font-size: .84rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            letter-spacing: .2px;
+        }
+
+        label .req { color: var(--purple-mid); margin-left: 2px; }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2e2ef;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: .96rem;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            appearance: none;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--purple-mid);
+            box-shadow: 0 0 0 3px rgba(102,126,234,.15);
+            background: #fff;
+            outline: none;
+        }
+
+        textarea { resize: vertical; min-height: 130px; }
+
+        /* ===== HONEYPOT (oculto — anti-spam) ===== */
+        .hp-field { display: none !important; }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--purple-mid) 0%, var(--purple-light) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 6px 24px rgba(102,126,234,.35);
+            margin-top: 4px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(102,126,234,.45);
+        }
+
+        .btn-mailto {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--purple-dark);
+            border: 1.5px solid var(--purple-mid);
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: .93rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-top: 10px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-mailto:hover {
+            background: rgba(102,126,234,.07);
+        }
+
+        /* ===== MENSAGEM DE SUCESSO ===== */
+        #obrigado {
+            display: none;
+            background: linear-gradient(135deg,#eef2ff,#f5f3ff);
+            border: 1.5px solid rgba(102,126,234,.3);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #obrigado.visible { display: block; }
+
+        #obrigado .check { font-size: 2.5rem; margin-bottom: 10px; }
+
+        #obrigado h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--purple-dark);
+            margin-bottom: 8px;
+        }
+
+        #obrigado p { color: var(--text-muted); font-size: .95rem; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--text-dark);
+            color: rgba(255,255,255,.55);
+            text-align: center;
+            padding: 28px 24px;
+            font-size: .86rem;
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            display: flex; align-items: center; gap: 10px;
+            background: var(--green-wa);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 12px 22px;
+            font-weight: 700;
+            font-size: .93rem;
+            box-shadow: 0 8px 28px rgba(0,0,0,.2);
+            transition: all var(--transition);
+            z-index: 900;
+        }
+
+        .whatsapp-float:hover { background: #1ebe5d; transform: translateY(-3px); }
+        .whatsapp-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+        @media (max-width: 600px) {
+            .whatsapp-float span.wa-label { display: none; }
+            .whatsapp-float { padding: 14px; border-radius: 50%; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE NAVBAR ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        .navbar-brand img {
+            height: 54px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-cta:hover {
+            opacity: .92;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            color: #fff !important;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 48px;
+        }
+
+        .portfolio-card {
+            background: var(--bg-card);
+            padding: 28px 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(102,126,234,.12);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(102,126,234,.28);
+        }
+
+        .portfolio-card h3 {
+            color: var(--purple-dark);
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-card p {
+            color: var(--text-muted);
+            font-size: .94rem;
+            margin-bottom: 16px;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--purple-dark);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .portfolio-link:hover {
+            color: var(--purple-light);
+        }
+
+        .briefing-section {
+            background: var(--bg-light);
+        }
+
+        .briefing-card {
+            background: var(--bg-card);
+            padding: clamp(18px, 4vw, 28px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .briefing-embed {
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(102,126,234,.14);
+            background: #fff;
+        }
+
+        .briefing-embed iframe {
+            width: 100%;
+            min-height: 1717px;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand img { height: 46px; }
+            .briefing-embed iframe { min-height: 1880px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .benefit-card:hover,
+            .service-item:hover,
+            .portfolio-card:hover,
+            .cta-button:hover,
+            .cta-outline:hover,
+            .whatsapp-cta-btn:hover,
+            .whatsapp-float:hover {
+                transform: none !important;
+            }
+        }
+
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "UAI Software",
+      "url": "https://uaisoftware.com.br/",
+      "logo": "https://uaisoftware.com.br/assets/uai-software-logo.png",
+      "image": "https://uaisoftware.com.br/assets/uai-software-logo.png",
+      "description": "Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.",
+      "telephone": "+55-34-3073-9343",
+      "email": "comercial@uaisoftware.com.br",
+      "areaServed": "BR",
+      "serviceType": [
+        "Criação de sites",
+        "Landing pages",
+        "Automação",
+        "SEO técnico",
+        "Soluções digitais"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-34-98897-7879",
+        "contactType": "sales",
+        "availableLanguage": ["Portuguese"]
+      }
+    }
+    </script>
+
+</head>
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="Menu principal">
+        <a href="#" class="navbar-brand" aria-label="Página inicial"><img src="assets/uai-software-logo.webp" alt="UAI Software"></a>
+
+        <ul class="nav-links" id="desktopNav">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#briefing-google">Briefing</a></li>
+            <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-controls="mobileNav" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav" aria-label="Menu mobile">
+        <ul>
+            <li><a href="#sobre" class="mobile-link">Sobre</a></li>
+            <li><a href="#servicos" class="mobile-link">Serviços</a></li>
+            <li><a href="#projetos" class="mobile-link">Projetos</a></li>
+            <li><a href="#briefing-google" class="mobile-link">Briefing</a></li>
+            <li><a href="#contato" class="mobile-link">Fale Conosco</a></li>
+        </ul>
+    </div>
+
+
+    <!-- ===== HERO ===== -->
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <span class="hero-badge">✦ Criação de Sites, Landing Pages e Automação</span>
+            <h1>Seu site precisa vender melhor, carregar rápido e passar confiança.</h1>
+            <p>Desenvolvemos sites institucionais, landing pages, automações e ajustes estratégicos para empresas que querem mais credibilidade, SEO e conversão.</p>
+            <div class="hero-btns">
+                <a href="#contato" class="cta-button">Solicitar análise do site</a>
+                <a href="#briefing-google" class="cta-outline">Preencher briefing online</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== BENEFÍCIOS ===== -->
+    
+    <section class="container" id="beneficios">
+        <h2 class="section-title">Por que otimizar seu site agora?</h2>
+        <span class="section-divider"></span>
+        <p class="section-subtitle" style="margin-top:14px;">Hoje, site lento, confuso ou mal posicionado faz a empresa perder credibilidade, tráfego e oportunidades comerciais.</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <h3>Mais credibilidade</h3>
+                <p>Um site profissional transmite confiança imediata e ajuda sua empresa a ser levada a sério logo no primeiro contato.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Melhor performance</h3>
+                <p>Estrutura mais leve, navegação mais clara e melhorias técnicas que favorecem experiência do usuário e velocidade.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🔎</div>
+                <h3>Base melhor para SEO</h3>
+                <p>Títulos, descrições, estrutura e dados organizados para facilitar indexação e aumentar relevância nas buscas.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Mais conversão</h3>
+                <p>Chamadas para ação, formulários e arquitetura pensados para transformar visitantes em leads e conversas comerciais.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤖</div>
+                <h3>Automação inteligente</h3>
+                <p>Integramos processos, formulários e fluxos digitais para reduzir atrito operacional e ganhar eficiência.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛠️</div>
+                <h3>Evolução contínua</h3>
+                <p>Seu site deixa de ser uma vitrine parada e passa a funcionar como um ativo comercial que pode ser melhorado continuamente.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== SERVIÇOS ===== -->
+    
+    <section class="services" id="servicos">
+        <div class="container">
+            <h2 class="section-title">Serviços em foco</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Soluções digitais para posicionar melhor sua empresa e transformar visita em oportunidade.</p>
+            <div class="service-list">
+                <div class="service-item"><h4>🌐 Criação de Sites</h4><p>Sites institucionais profissionais com estrutura clara, rápida e responsiva.</p></div>
+                <div class="service-item"><h4>🎯 Landing Pages</h4><p>Páginas focadas em captação de leads, campanhas e ofertas específicas.</p></div>
+                <div class="service-item"><h4>🛒 E-commerce e Catálogo</h4><p>Estruturas para vender, apresentar produtos e facilitar o contato comercial.</p></div>
+                <div class="service-item"><h4>⚙️ Otimização Técnica</h4><p>Ajustes de performance, UX, SEO on-page, estrutura e chamadas para ação.</p></div>
+                <div class="service-item"><h4>📈 Analytics e Conversão</h4><p>Integração com ferramentas de medição para acompanhar tráfego e oportunidades.</p></div>
+                <div class="service-item"><h4>🤖 Automações</h4><p>Fluxos digitais para formulários, atendimento, organização e produtividade.</p></div>
+                <div class="service-item"><h4>🧩 Manutenção e Evolução</h4><p>Correções, melhorias contínuas e suporte para manter o site vivo e confiável.</p></div>
+                <div class="service-item"><h4>📱 Presença Digital Integrada</h4><p>Quando necessário, alinhamos site, redes sociais e canais de contato em uma estratégia só.</p></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== STATS ===== -->
+    
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item"><h3>01</h3><p>Diagnóstico técnico e comercial do seu site atual</p></div>
+            <div class="stat-item"><h3>02</h3><p>Reposicionamento de mensagem, estrutura e chamadas para ação</p></div>
+            <div class="stat-item"><h3>03</h3><p>Implementação de melhorias visuais, técnicas e de conversão</p></div>
+            <div class="stat-item"><h3>04</h3><p>Entrega com formulário, WhatsApp e briefing integrados ao funil</p></div>
+        </div>
+    </section>
+
+
+    <!-- ===== DEPOIMENTOS ===== -->
+    
+    <section class="testimonials" id="projetos">
+        <div class="container">
+            <h2 class="section-title">Projetos e soluções em destaque</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Em vez de promessas genéricas, mostramos estruturas e ofertas reais que representam a linha de trabalho da UAI Software.</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <h3>UAI Software</h3>
+                    <p>Site institucional com foco em apresentação de serviços, contato comercial e posicionamento digital para empresas.</p>
+                    <a class="portfolio-link" href="https://uaisoftware.com.br/" target="_blank" rel="noopener noreferrer">Ver site ↗</a>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Rastreamento Veículo</h3>
+                    <p>Solução voltada a rastreamento veicular, presença digital e captação comercial para atendimento em todo o Brasil.</p>
+                    <a class="portfolio-link" href="https://rastreamentoveiculo.com.br/" target="_blank" rel="noopener noreferrer">Ver projeto ↗</a>
+                </div>
+                <div class="portfolio-card">
+                    <h3>LGVG Flow</h3>
+                    <p>Página comercial para apresentação de produto, mentoria e oferta digital com proposta objetiva e CTA direto.</p>
+                    <a class="portfolio-link" href="https://comercial978.github.io/lgvgflow/" target="_blank" rel="noopener noreferrer">Ver página ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== CTA SECTION ===== -->
+    
+    <section class="cta-section">
+        <h2>Vamos transformar seu site em um ativo comercial?</h2>
+        <p>Fale conosco pelo formulário, pelo WhatsApp ou preencha o briefing online sem sair do site.</p>
+        <div class="cta-group">
+            <a href="#contato" class="cta-button">Solicitar proposta</a>
+            <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20cria%C3%A7%C3%A3o%20ou%20otimiza%C3%A7%C3%A3o%20de%20site."
+               class="whatsapp-cta-btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Chamar no WhatsApp
+            </a>
+        </div>
+    </section>
+
+
+    <!-- =================================================================
+         SEÇÃO DE CONTATO (ADICIONADA / MELHORADA)
+         
+         ENVIO PRINCIPAL: FormSubmit (https://formsubmit.co/)
+         • action aponta para formsubmit.co com o e-mail alvo
+         • _next redireciona de volta para a página com parâmetro ?enviado=1
+         • _subject define o assunto padrão do e-mail
+         • _captcha=false desativa o captcha do FormSubmit (optamos por honeypot)
+         • _honey é o campo honeypot anti-spam (oculto via CSS)
+         
+         FALLBACK: botão "Enviar por e-mail" usa JS para montar um mailto:
+         com subject e body preenchidos a partir dos campos do formulário.
+         ================================================================= -->
+    <section id="contato" style="background:var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Solicite seu orçamento</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Use o formulário abaixo para falar sobre criação, otimização ou automação do seu site. Retornaremos em até 24 horas úteis.</p>
+
+            <div class="contact-wrapper">
+                <!-- Info lateral -->
+                <div class="contact-info">
+                    <h3>Vamos conversar sobre o seu site?</h3>
+                    <p>Nossa equipe está pronta para entender seu cenário, identificar gargalos e propor melhorias práticas para o seu projeto digital.</p>
+
+                    <div class="contact-detail">
+                        <div class="icon-wrap">✉️</div>
+                        <span><a href="mailto:comercial@uaisoftware.com.br" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>comercial@uaisoftware.com.br</a></span>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon-wrap">📞</div>
+                        <span>(34) 98897-7879</span>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="icon-wrap">⏱️</div>
+                        <span>Resposta em até 24h úteis</span>
+                    </div>
+                </div>
+
+                <!-- Formulário -->
+                <div class="contact-form-card">
+                    <!--
+                        FormSubmit: substitua YOUR_FORM_TOKEN pelo token que FormSubmit envia
+                        ao seu e-mail na primeira submissão. Enquanto isso, o action abaixo
+                        já funciona com o e-mail diretamente.
+                    -->
+                    <form
+                        id="contactForm"
+                        action="https://formsubmit.co/comercial@uaisoftware.com.br"
+                        method="POST"
+                        novalidate
+                    >
+                        <!-- Configurações FormSubmit -->
+                        <input type="hidden" name="_subject" value="Novo contato via site — UAI Software">
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- _next: após envio retorna à página com ?enviado=1 para exibir mensagem de sucesso -->
+                        <input type="hidden" name="_next" id="formNext" value="">
+                        <input type="hidden" name="_template" value="table">
+
+                        <!-- HONEYPOT ANTI-SPAM (campo oculto — bots preenchem, humanos não) -->
+                        <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                        <!-- Nome + Email -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome<span class="req" aria-hidden="true">*</span></label>
+                                <input type="text" id="nome" name="Nome" placeholder="Seu nome completo" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail<span class="req" aria-hidden="true">*</span></label>
+                                <input type="email" id="email" name="Email" placeholder="seu@email.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Telefone + Assunto -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefone">Telefone / WhatsApp</label>
+                                <input type="tel" id="telefone" name="Telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label for="assunto">Assunto<span class="req" aria-hidden="true">*</span></label>
+                                <input type="text" id="assunto" name="Assunto" placeholder="Ex: criação de site institucional" required>
+                            </div>
+                        </div>
+
+                        <!-- Mensagem -->
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem<span class="req" aria-hidden="true">*</span></label>
+                            <textarea id="mensagem" name="Mensagem" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
+                        </div>
+
+                        <!-- Botão principal -->
+                        <button type="submit" class="btn-submit">
+                            <span>📨</span> Enviar Mensagem
+                        </button>
+                    </form>
+
+                    <!-- INÍCIO fallback profissional -->
+                    <a href="#"
+                       id="fallbackEmail"
+                       class="btn-mailto"
+                       aria-label="Abrir cliente de e-mail com os dados preenchidos">
+                        ✉️ Fallback: Enviar por e-mail
+                    </a>
+                    <!-- FIM fallback profissional -->
+
+                    <!-- Mensagem de sucesso (exibida via JS quando ?enviado=1 na URL) -->
+                    <div id="obrigado" role="alert" aria-live="polite">
+                        <div class="check">✅</div>
+                        <h4>Mensagem enviada com sucesso!</h4>
+                        <p>Obrigado pelo contato. Nossa equipe retornará em até 24 horas úteis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="briefing-google" class="briefing-section">
+        <div class="container">
+            <h2 class="section-title">Briefing online sem sair do site</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Se preferir, preencha o formulário detalhado incorporado abaixo. Ele ajuda a acelerar a análise e o envio da proposta.</p>
+
+            <div class="briefing-card">
+                <div class="briefing-embed">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf49kC0bftFT7tRfpHyInlTPAlowrYuvFlTEAAF86npJxGhAA/viewform?embedded=true"
+                            width="640"
+                            height="1717"
+                            frameborder="0"
+                            marginheight="0"
+                            marginwidth="0">Carregando…</iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOBRE ===== -->
+
+    <section id="sobre" style="background:#fff;">
+        <div class="container">
+            <h2 class="section-title">Sobre a UAI Software</h2>
+            <span class="section-divider"></span>
+            <div class="sobre-layout">
+                <div class="sobre-logo-box">
+                    <img src="assets/uai-software-logo.webp" alt="UAI Software">
+                </div>
+                <div class="sobre-intro">
+                    <p>A <strong>UAI Software</strong> nasceu em 2004 com o propósito de unir tecnologia, proximidade e inteligência de negócio em soluções digitais que realmente geram valor para empresas.</p>
+                    <br>
+                    <p>Mais do que uma expressão forte da identidade brasileira, o nome <strong>UAI</strong> carrega o significado que sustenta a essência da marca: <strong>Unidade, Apoio e Informação</strong>.</p>
+                </div>
+            </div>
+            <div class="sobre-pilares">
+                <div class="pilar-card">
+                    <div class="pilar-icon">🔗</div>
+                    <h3>Unidade</h3>
+                    <p>Integração, organização e conexão entre processos, setores e pessoas.</p>
+                </div>
+                <div class="pilar-card apoio">
+                    <div class="pilar-icon">🤝</div>
+                    <h3>Apoio</h3>
+                    <p>Compromisso de estar ao lado do cliente com suporte, parceria e orientação estratégica.</p>
+                </div>
+                <div class="pilar-card info">
+                    <div class="pilar-icon">💡</div>
+                    <h3>Informação</h3>
+                    <p>Base para decisões mais inteligentes, maior controle e crescimento sustentável.</p>
+                </div>
+            </div>
+            <div class="sobre-texto-extra">
+                <p>Esses três pilares refletem a forma como a UAI Software desenvolve suas soluções: conectando tecnologia e gestão para transformar rotinas operacionais em resultados concretos.</p>
+                <p>A identidade visual da marca reforça esse posicionamento. O <span style="color:var(--purple-dark);font-weight:600;">azul</span> transmite confiança, solidez e inteligência tecnológica. O <span style="color:#e07b20;font-weight:600;">laranja</span> expressa energia, inovação e movimento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <p style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.3px;color:#fff;">UAI Software</p>
+            <p style="font-size:.95rem;opacity:.9;">Tecnologia que conecta, automatiza e impulsiona resultados.</p>
+            <p style="font-size:.85rem;opacity:.7;">Criação de sites, automação e soluções digitais para empresas.</p>
+            <p style="font-size:.85rem;opacity:.7;">Atendimento online para todo o Brasil.</p>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:6px;font-size:.88rem;">
+                <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20cria%C3%A7%C3%A3o%20ou%20otimiza%C3%A7%C3%A3o%20de%20site."
+                   target="_blank" rel="noopener noreferrer"
+                   style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp: (34) 98897-7879
+                </a>
+                <a href="tel:+553430739343"
+                   style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    Telefone: (34) 3073-9343
+                </a>
+                <a href="mailto:comercial@uaisoftware.com.br" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>comercial@uaisoftware.com.br</a>
+            </div>
+            <hr style="width:100%;border:none;border-top:1px solid rgba(255,255,255,.12);margin:8px 0;">
+            <p style="font-size:.8rem;opacity:.5;">&copy; 2004-2026 UAI Software — Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20cria%C3%A7%C3%A3o%20ou%20otimiza%C3%A7%C3%A3o%20de%20site."
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Fale conosco pelo WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="wa-label">Falar no WhatsApp</span>
+    </a>
+
+    <!-- =====================================================================
+         JAVASCRIPT
+         1) Navbar: hamburger toggle + dropdown Soluções (desktop e mobile)
+         2) Formulário:
+            • define _next dinamicamente (URL atual + ?enviado=1)
+            • exibe #obrigado quando URL contém ?enviado=1
+            • monta botão mailto fallback com JS lendo os campos do form
+         ===================================================================== -->
+    
+    <script>
+        // ----- 1) NAVBAR -----
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav  = document.getElementById('mobileNav');
+
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                const open = mobileNav.classList.toggle('open');
+                hamburger.classList.toggle('active', open);
+                hamburger.setAttribute('aria-expanded', open);
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('open');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        // ----- 2) FORMULÁRIO -----
+        const formNext = document.getElementById('formNext');
+        const baseUrl  = window.location.href.split('?')[0].split('#')[0];
+
+        if (formNext) {
+            formNext.value = baseUrl + '?enviado=1#contato';
+        }
+
+        if (new URLSearchParams(window.location.search).get('enviado') === '1') {
+            const obrigado = document.getElementById('obrigado');
+            if (obrigado) {
+                obrigado.classList.add('visible');
+                obrigado.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        const fallbackEmailBtn = document.getElementById('fallbackEmail');
+        if (fallbackEmailBtn) {
+            fallbackEmailBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                function val(selector) {
+                    var el = document.querySelector(selector);
+                    return el ? el.value.trim() : '';
+                }
+
+                var nome     = val('input[name="Nome"]')     || val('input[name="nome"]');
+                var email    = val('input[name="Email"]')    || val('input[name="email"]');
+                var telefone = val('input[name="Telefone"]') || val('input[name="telefone"]')
+                                                             || val('input[name="whatsapp"]')
+                                                             || val('input[name="phone"]');
+                var assunto  = val('input[name="Assunto"]')  || val('input[name="assunto"]')
+                                                             || val('select[name="Assunto"]');
+                var mensagem = val('textarea[name="Mensagem"]') || val('textarea[name="mensagem"]');
+
+                var subject = assunto ? ('Contato via site — ' + assunto) : 'Contato via site — UAI Software';
+                var body =
+                    'Nome: ' + (nome || '-') + '\n' +
+                    'E-mail: ' + (email || '-') + '\n' +
+                    'Telefone/WhatsApp: ' + (telefone || '-') + '\n' +
+                    'Assunto: ' + (assunto || '-') + '\n\n' +
+                    'Mensagem:\n' + (mensagem || '-');
+
+                window.location.href =
+                    'mailto:comercial@uaisoftware.com.br?subject=' + encodeURIComponent(subject) +
+                    '&body=' + encodeURIComponent(body);
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -165,7 +165,6 @@
 
         /* ===== MOBILE NAV ===== */
         .mobile-nav {
-            display: none;
             position: fixed;
             top: 64px;
             left: 0; right: 0;
@@ -176,12 +175,15 @@
             z-index: 999;
             transform: translateY(-8px);
             opacity: 0;
-            transition: opacity var(--transition), transform var(--transition);
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
         }
 
         .mobile-nav.open {
-            display: block;
             opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
             transform: translateY(0);
         }
 
@@ -817,6 +819,7 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
+            .navbar-brand img { height: 46px; }
         }
 
         .navbar-brand img {
@@ -882,30 +885,61 @@
             background: var(--bg-light);
         }
 
-        .briefing-card {
+        .briefing-cta-box {
             background: var(--bg-card);
-            padding: clamp(18px, 4vw, 28px);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
+            padding: clamp(40px, 6vw, 64px) clamp(28px, 5vw, 56px);
+            text-align: center;
+            max-width: 580px;
+            margin: 40px auto 0;
+            border: 1px solid rgba(102,126,234,.12);
         }
 
-        .briefing-embed {
-            overflow: hidden;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(102,126,234,.14);
-            background: #fff;
+        .briefing-icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
         }
 
-        .briefing-embed iframe {
-            width: 100%;
-            min-height: 1717px;
-            border: 0;
+        .briefing-cta-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .briefing-cta-box p {
+            color: var(--text-muted);
+            font-size: .97rem;
+            line-height: 1.75;
+            margin-bottom: 28px;
+        }
+
+        .btn-briefing {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: 0 6px 24px rgba(102,126,234,.35);
+        }
+
+        .btn-briefing:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(102,126,234,.45);
+        }
+
+        .briefing-note {
             display: block;
-        }
-
-        @media (max-width: 768px) {
-            .navbar-brand img { height: 46px; }
-            .briefing-embed iframe { min-height: 1880px; }
+            margin-top: 14px;
+            font-size: .8rem;
+            color: var(--text-muted);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1319,19 +1353,21 @@
 
     <section id="briefing-google" class="briefing-section">
         <div class="container">
-            <h2 class="section-title">Briefing online sem sair do site</h2>
+            <h2 class="section-title">Briefing online</h2>
             <span class="section-divider"></span>
-            <p class="section-subtitle" style="margin-top:14px;">Se preferir, preencha o formulário detalhado incorporado abaixo. Ele ajuda a acelerar a análise e o envio da proposta.</p>
+            <p class="section-subtitle" style="margin-top:14px;">Preencha o formulário detalhado para agilizar a análise e o envio da proposta. Leva menos de 5 minutos.</p>
 
-            <div class="briefing-card">
-                <div class="briefing-embed">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf49kC0bftFT7tRfpHyInlTPAlowrYuvFlTEAAF86npJxGhAA/viewform?embedded=true"
-                            height="1717"
-                            frameborder="0"
-                            loading="lazy"
-                            marginheight="0"
-                            marginwidth="0">Carregando…</iframe>
-                </div>
+            <div class="briefing-cta-box">
+                <div class="briefing-icon">📋</div>
+                <h3>Formulário de Briefing</h3>
+                <p>Conte sobre seu projeto, segmento, objetivos e o que você espera do seu site. Com essas informações, conseguimos entregar uma proposta muito mais precisa e personalizada.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf49kC0bftFT7tRfpHyInlTPAlowrYuvFlTEAAF86npJxGhAA/viewform"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn-briefing">
+                    📋 Preencher briefing agora
+                </a>
+                <span class="briefing-note">Abre em nova aba · Gratuito · Sem compromisso</span>
             </div>
         </div>
     </section>

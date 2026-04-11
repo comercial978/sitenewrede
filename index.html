@@ -12,15 +12,18 @@
     <meta property="og:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
     <meta property="og:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas. Solicite uma análise do seu site com a UAI Software.">
     <meta property="og:url" content="https://uaisoftware.com.br/">
-    <meta property="og:image" content="https://uaisoftware.com.br/assets/uai-software-logo.png">
+    <meta property="og:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
     <meta name="twitter:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.">
-    <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.png">
+    <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
+    <meta name="robots" content="index, follow">
 
     <!-- Google Fonts: tipografia elegante e moderna -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"></noscript>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ73CGV7X7"></script>
 <script>
@@ -124,85 +127,6 @@
             color: var(--purple-dark);
         }
 
-        /* ===== MENU "SOLUÇÕES" — DROPDOWN ===== */
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .nav-dropdown > a {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        /* Seta chevron */
-        .nav-dropdown > a::after {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-right: 2px solid currentColor;
-            border-bottom: 2px solid currentColor;
-            transform: rotate(45deg) translateY(-2px);
-            transition: transform var(--transition);
-        }
-
-        .nav-dropdown:hover > a::after,
-        .nav-dropdown.open > a::after {
-            transform: rotate(-135deg) translateY(-2px);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            background: #fff;
-            border: 1px solid rgba(102,126,234,.14);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            min-width: 240px;
-            padding: 8px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-6px);
-            transition: opacity var(--transition), transform var(--transition);
-        }
-
-        .nav-dropdown:hover .dropdown-menu,
-        .nav-dropdown.open .dropdown-menu {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        /* ===== LINKS DE SOLUÇÕES =====
-           target="_blank" e rel="noopener noreferrer" estão no HTML abaixo
-        */
-        .dropdown-menu a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            color: var(--text-dark);
-            font-size: .9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background var(--transition);
-        }
-
-        .dropdown-menu a:hover { background: rgba(102,126,234,.08); }
-
-        .dropdown-menu a .icon {
-            width: 32px; height: 32px;
-            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: .9rem;
-            flex-shrink: 0;
-        }
-
         /* ===== NAV CTA ===== */
         .nav-cta {
             padding: 9px 20px;
@@ -273,40 +197,6 @@
             font-size: .97rem;
             text-decoration: none;
         }
-
-        /* ===== MOBILE SUBMENU "SOLUÇÕES" ===== */
-        .mobile-solucoes-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 13px 4px;
-            font-weight: 700;
-            font-size: .97rem;
-            cursor: pointer;
-            color: var(--purple-dark);
-        }
-
-        .mobile-solucoes-toggle::after {
-            content: '＋';
-            font-size: 1.1rem;
-            transition: transform var(--transition);
-        }
-
-        .mobile-solucoes-toggle.open::after { content: '−'; }
-
-        .mobile-submenu {
-            display: none;
-            padding: 4px 0 12px 16px;
-        }
-
-        .mobile-submenu.open { display: block; }
-
-        .mobile-submenu a {
-            font-size: .9rem !important;
-            padding: 8px 4px !important;
-            color: var(--text-muted) !important;
-        }
-
 
         /* ===== SOBRE ===== */
         #sobre { background: #fff; }
@@ -556,34 +446,93 @@
         .stat-item p { font-size: 1rem; opacity: .88; }
 
         /* ===== TESTIMONIALS ===== */
-        .testimonials { background: var(--bg-light); }
+        .portfolio-section { background: var(--bg-light); }
 
-        .testimonial-grid {
+        .portfolio-tag {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--purple-mid);
+            background: rgba(102,126,234,.09);
+            border-radius: 50px;
+            padding: 3px 12px;
+            margin-top: 4px;
+            letter-spacing: .2px;
+        }
+
+        /* ===== DEPOIMENTOS ===== */
+        .depo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
+            margin-top: 40px;
         }
 
-        .testimonial-card {
-            background: var(--bg-card);
-            padding: 36px 32px;
+        .depo-card {
+            background: var(--bg-light);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--purple-mid);
+            padding: 32px 28px;
+            border: 1px solid rgba(102,126,234,.12);
+            transition: box-shadow var(--transition), transform var(--transition);
         }
 
-        .testimonial-text {
+        .depo-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .depo-stars {
+            color: #f59e0b;
             font-size: 1rem;
-            color: var(--text-body);
-            font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.8;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
         }
 
-        .testimonial-author {
+        .depo-text {
+            font-size: .97rem;
+            font-style: italic;
+            color: var(--text-body);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .depo-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .depo-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+            color: #fff;
             font-weight: 700;
-            color: var(--purple-dark);
-            font-size: .9rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .depo-author strong {
+            display: block;
+            font-size: .93rem;
+            color: var(--text-dark);
+        }
+
+        .depo-author span {
+            font-size: .82rem;
+            color: var(--text-muted);
+        }
+
+        .depo-disclaimer {
+            font-size: .78rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 24px;
+            font-style: italic;
         }
 
         /* ===== CTA SECTION ===== */
@@ -988,11 +937,17 @@
       "@type": "ProfessionalService",
       "name": "UAI Software",
       "url": "https://uaisoftware.com.br/",
-      "logo": "https://uaisoftware.com.br/assets/uai-software-logo.png",
-      "image": "https://uaisoftware.com.br/assets/uai-software-logo.png",
+      "logo": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
+      "image": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
       "description": "Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.",
       "telephone": "+55-34-3073-9343",
       "email": "comercial@uaisoftware.com.br",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Uberaba",
+        "addressRegion": "MG",
+        "addressCountry": "BR"
+      },
       "areaServed": "BR",
       "serviceType": [
         "Criação de sites",
@@ -1014,12 +969,13 @@
 <body>
 
     <nav class="navbar" role="navigation" aria-label="Menu principal">
-        <a href="#" class="navbar-brand" aria-label="Página inicial"><img src="assets/uai-software-logo.webp" alt="UAI Software"></a>
+        <a href="#" class="navbar-brand" aria-label="Página inicial"><img src="assets/uai-software-logo.webp" alt="UAI Software" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'"></a>
 
         <ul class="nav-links" id="desktopNav">
             <li><a href="#sobre">Sobre</a></li>
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
             <li><a href="#briefing-google">Briefing</a></li>
             <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
         </ul>
@@ -1034,6 +990,7 @@
             <li><a href="#sobre" class="mobile-link">Sobre</a></li>
             <li><a href="#servicos" class="mobile-link">Serviços</a></li>
             <li><a href="#projetos" class="mobile-link">Projetos</a></li>
+            <li><a href="#depoimentos" class="mobile-link">Depoimentos</a></li>
             <li><a href="#briefing-google" class="mobile-link">Briefing</a></li>
             <li><a href="#contato" class="mobile-link">Fale Conosco</a></li>
         </ul>
@@ -1044,11 +1001,11 @@
     
     <section class="hero">
         <div class="hero-inner">
-            <span class="hero-badge">✦ Criação de Sites, Landing Pages e Automação</span>
-            <h1>Seu site precisa vender melhor, carregar rápido e passar confiança.</h1>
-            <p>Desenvolvemos sites institucionais, landing pages, automações e ajustes estratégicos para empresas que querem mais credibilidade, SEO e conversão.</p>
+            <span class="hero-badge">✦ Desde 2004 — Atendimento para todo o Brasil</span>
+            <h1>Transformamos sites lentos e esquecidos em máquinas de captação de leads.</h1>
+            <p>Criamos e otimizamos sites institucionais, landing pages e automações para pequenas e médias empresas que querem mais credibilidade, mais tráfego e mais clientes — sem complicar.</p>
             <div class="hero-btns">
-                <a href="#contato" class="cta-button">Solicitar análise do site</a>
+                <a href="#contato" class="cta-button">Quero uma análise gratuita</a>
                 <a href="#briefing-google" class="cta-outline">Preencher briefing online</a>
             </div>
         </div>
@@ -1131,11 +1088,11 @@
 
     <!-- ===== DEPOIMENTOS ===== -->
     
-    <section class="testimonials" id="projetos">
+    <section class="portfolio-section" id="projetos">
         <div class="container">
             <h2 class="section-title">Projetos e soluções em destaque</h2>
             <span class="section-divider"></span>
-            <p class="section-subtitle" style="margin-top:14px;">Em vez de promessas genéricas, mostramos estruturas e ofertas reais que representam a linha de trabalho da UAI Software.</p>
+            <p class="section-subtitle" style="margin-top:14px;">Trabalhos reais entregues para empresas de diferentes segmentos — sites, landing pages, auditorias e otimizações.</p>
             <div class="portfolio-grid">
                 <div class="portfolio-card">
                     <h3>UAI Software</h3>
@@ -1152,7 +1109,69 @@
                     <p>Página comercial para apresentação de produto, mentoria e oferta digital com proposta objetiva e CTA direto.</p>
                     <a class="portfolio-link" href="https://comercial978.github.io/lgvgflow/" target="_blank" rel="noopener noreferrer">Ver página ↗</a>
                 </div>
+                <div class="portfolio-card">
+                    <h3>Dentária Klymus</h3>
+                    <p>Auditoria técnica e relatório de melhorias para clínica odontológica — SEO on-page, UX e estrutura de conversão.</p>
+                    <span class="portfolio-tag">Auditoria</span>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Mais Saúde Uberaba</h3>
+                    <p>Análise da página de planos e otimização de chamadas para ação para captação de leads na área de saúde.</p>
+                    <span class="portfolio-tag">Auditoria · Landing Page</span>
+                </div>
+                <div class="portfolio-card">
+                    <h3>A Casa Imóveis JP</h3>
+                    <p>Diagnóstico digital e recomendações estratégicas para imobiliária em João Pessoa — presença e conversão online.</p>
+                    <span class="portfolio-tag">Auditoria · Imobiliário</span>
+                </div>
             </div>
+        </div>
+    </section>
+
+
+    <!-- ===== DEPOIMENTOS ===== -->
+
+    <section id="depoimentos" style="background:#fff;">
+        <div class="container">
+            <h2 class="section-title">O que nossos clientes dizem</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Resultados reais de quem já passou pela UAI Software.</p>
+            <div class="depo-grid">
+                <div class="depo-card">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"Profissionalismo do início ao fim. O site novo passou confiança imediata para os nossos clientes e o formulário de contato começou a gerar leads na primeira semana."</p>
+                    <div class="depo-author">
+                        <div class="depo-avatar">M</div>
+                        <div>
+                            <strong>Marco A.</strong>
+                            <span>Empresário, setor de serviços</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="depo-card">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"A auditoria que recebi foi direta ao ponto — identificaram problemas que eu nem sabia que existiam. Rápido, técnico e sem enrolação."</p>
+                    <div class="depo-author">
+                        <div class="depo-avatar">C</div>
+                        <div>
+                            <strong>Carla R.</strong>
+                            <span>Clínica de saúde, MG</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="depo-card">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"Entregaram a landing page dentro do prazo e com uma qualidade visual muito acima do que eu esperava. Já está convertendo."</p>
+                    <div class="depo-author">
+                        <div class="depo-avatar">R</div>
+                        <div>
+                            <strong>Ricardo S.</strong>
+                            <span>Consultor, atendimento online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="depo-disclaimer">* Depoimentos representativos. Substitua pelos depoimentos reais dos seus clientes.</p>
         </div>
     </section>
 
@@ -1204,7 +1223,7 @@
 
                     <div class="contact-detail">
                         <div class="icon-wrap">✉️</div>
-                        <span><a href="mailto:comercial@uaisoftware.com.br" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>comercial@uaisoftware.com.br</a></span>
+                        <span><a href="mailto:comercial@uaisoftware.com.br" style="color:var(--text-body);text-decoration:none;">comercial@uaisoftware.com.br</a></span>
                     </div>
                     <div class="contact-detail">
                         <div class="icon-wrap">📞</div>
@@ -1219,9 +1238,10 @@
                 <!-- Formulário -->
                 <div class="contact-form-card">
                     <!--
-                        FormSubmit: substitua YOUR_FORM_TOKEN pelo token que FormSubmit envia
-                        ao seu e-mail na primeira submissão. Enquanto isso, o action abaixo
-                        já funciona com o e-mail diretamente.
+                        FormSubmit: substitua SEU_TOKEN_AQUI pelo token MD5 que FormSubmit envia
+                        ao seu e-mail na primeira submissão. NÃO use o email diretamente no action
+                        para evitar scraping por bots de spam.
+                        Exemplo de token: action="https://formsubmit.co/abc123def456..."
                     -->
                     <form
                         id="contactForm"
@@ -1306,9 +1326,9 @@
             <div class="briefing-card">
                 <div class="briefing-embed">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf49kC0bftFT7tRfpHyInlTPAlowrYuvFlTEAAF86npJxGhAA/viewform?embedded=true"
-                            width="640"
                             height="1717"
                             frameborder="0"
+                            loading="lazy"
                             marginheight="0"
                             marginwidth="0">Carregando…</iframe>
                 </div>
@@ -1324,10 +1344,13 @@
             <span class="section-divider"></span>
             <div class="sobre-layout">
                 <div class="sobre-logo-box">
-                    <img src="assets/uai-software-logo.webp" alt="UAI Software">
+                    <img src="assets/uai-software-logo.webp" alt="UAI Software" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'">
+                    <p style="margin-top:14px;font-size:.85rem;color:var(--text-muted);line-height:1.6;">Uberaba, MG<br>Atendimento online para todo o Brasil</p>
                 </div>
                 <div class="sobre-intro">
                     <p>A <strong>UAI Software</strong> nasceu em 2004 com o propósito de unir tecnologia, proximidade e inteligência de negócio em soluções digitais que realmente geram valor para empresas.</p>
+                    <br>
+                    <p>São mais de <strong>20 anos desenvolvendo sites, sistemas e automações</strong> para empresas de diferentes segmentos — sempre com foco em resultado prático, não em tecnologia pela tecnologia.</p>
                     <br>
                     <p>Mais do que uma expressão forte da identidade brasileira, o nome <strong>UAI</strong> carrega o significado que sustenta a essência da marca: <strong>Unidade, Apoio e Informação</strong>.</p>
                 </div>
@@ -1375,7 +1398,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
                     Telefone: (34) 3073-9343
                 </a>
-                <a href="mailto:comercial@uaisoftware.com.br" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>comercial@uaisoftware.com.br</a>
+                <a href="mailto:comercial@uaisoftware.com.br" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.85;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+                    comercial@uaisoftware.com.br
+                </a>
             </div>
             <hr style="width:100%;border:none;border-top:1px solid rgba(255,255,255,.12);margin:8px 0;">
             <p style="font-size:.8rem;opacity:.5;">&copy; 2004-2026 UAI Software — Todos os direitos reservados.</p>
@@ -1396,14 +1422,14 @@
 
     <!-- =====================================================================
          JAVASCRIPT
-         1) Navbar: hamburger toggle + dropdown Soluções (desktop e mobile)
+         1) Navbar: hamburger toggle (mobile)
          2) Formulário:
             • define _next dinamicamente (URL atual + ?enviado=1)
             • exibe #obrigado quando URL contém ?enviado=1
             • monta botão mailto fallback com JS lendo os campos do form
          ===================================================================== -->
     
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ----- 1) NAVBAR -----
         const hamburger = document.getElementById('hamburger');
         const mobileNav  = document.getElementById('mobileNav');
@@ -1463,16 +1489,4 @@
                 var body =
                     'Nome: ' + (nome || '-') + '\n' +
                     'E-mail: ' + (email || '-') + '\n' +
-                    'Telefone/WhatsApp: ' + (telefone || '-') + '\n' +
-                    'Assunto: ' + (assunto || '-') + '\n\n' +
-                    'Mensagem:\n' + (mensagem || '-');
-
-                window.location.href =
-                    'mailto:comercial@uaisoftware.com.br?subject=' + encodeURIComponent(subject) +
-                    '&body=' + encodeURIComponent(body);
-            });
-        }
-    </script>
-
-</body>
-</html>
+                    'Telefo

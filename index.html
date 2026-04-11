@@ -1465,20 +1465,24 @@
             • monta botão mailto fallback com JS lendo os campos do form
          ===================================================================== -->
     
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
         // ----- 1) NAVBAR -----
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav  = document.getElementById('mobileNav');
+        var hamburger = document.getElementById('hamburger');
+        var mobileNav  = document.getElementById('mobileNav');
 
         if (hamburger && mobileNav) {
-            hamburger.addEventListener('click', () => {
-                const open = mobileNav.classList.toggle('open');
+            hamburger.addEventListener('click', function () {
+                var open = mobileNav.classList.toggle('open');
                 hamburger.classList.toggle('active', open);
-                hamburger.setAttribute('aria-expanded', open);
+                hamburger.setAttribute('aria-expanded', String(open));
             });
 
-            document.querySelectorAll('.mobile-link').forEach(link => {
-                link.addEventListener('click', () => {
+            document.querySelectorAll('.mobile-link').forEach(function (link) {
+                link.addEventListener('click', function () {
                     mobileNav.classList.remove('open');
                     hamburger.classList.remove('active');
                     hamburger.setAttribute('aria-expanded', 'false');
@@ -1487,22 +1491,22 @@
         }
 
         // ----- 2) FORMULÁRIO -----
-        const formNext = document.getElementById('formNext');
-        const baseUrl  = window.location.href.split('?')[0].split('#')[0];
+        var formNext = document.getElementById('formNext');
+        var baseUrl  = window.location.href.split('?')[0].split('#')[0];
 
         if (formNext) {
             formNext.value = baseUrl + '?enviado=1#contato';
         }
 
         if (new URLSearchParams(window.location.search).get('enviado') === '1') {
-            const obrigado = document.getElementById('obrigado');
+            var obrigado = document.getElementById('obrigado');
             if (obrigado) {
                 obrigado.classList.add('visible');
                 obrigado.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
 
-        const fallbackEmailBtn = document.getElementById('fallbackEmail');
+        var fallbackEmailBtn = document.getElementById('fallbackEmail');
         if (fallbackEmailBtn) {
             fallbackEmailBtn.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1523,6 +1527,20 @@
 
                 var subject = assunto ? ('Contato via site — ' + assunto) : 'Contato via site — UAI Software';
                 var body =
-                    'Nome: ' + (nome || '-') + '\n' +
-                    'E-mail: ' + (email || '-') + '\n' +
-                    'Telefo
+                    'Nome: '     + (nome     || '-') + '\n' +
+                    'E-mail: '   + (email    || '-') + '\n' +
+                    'Telefone: ' + (telefone || '-') + '\n' +
+                    'Assunto: '  + (assunto  || '-') + '\n\n' +
+                    'Mensagem:\n' + (mensagem || '-');
+
+                window.location.href = 'mailto:comercial@uaisoftware.com.br'
+                    + '?subject=' + encodeURIComponent(subject)
+                    + '&body='    + encodeURIComponent(body);
+            });
+        }
+
+    }); // fim DOMContentLoaded
+    </script>
+
+</body>
+</html>

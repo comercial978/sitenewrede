@@ -38,9 +38,15 @@
       margin: 20px 0;
     }
 
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     a {
-      display: inline-block;
-      padding: 12px 24px;
+      display: block;
+      padding: 12px;
       background: #facc15;
       color: #000;
       text-decoration: none;
@@ -48,8 +54,14 @@
       font-weight: bold;
     }
 
+    a.secondary {
+      background: transparent;
+      border: 1px solid #facc15;
+      color: #facc15;
+    }
+
     a:hover {
-      background: #eab308;
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -58,9 +70,14 @@
   <div class="container">
     <h1>404</h1>
     <h2>Página não encontrada</h2>
-    <p>O conteúdo que você tentou acessar não existe ou foi movido.</p>
+    <p>Mas calma… você ainda pode acessar conteúdos estratégicos abaixo:</p>
 
-    <a href="https://uaisoftware.com.br">Voltar para o site</a>
+    <div class="buttons">
+      <a href="https://uaisoftware.com.br">Ir para o site principal</a>
+      <a href="https://uaisoftware.com.br/auditoria.html" class="secondary">
+        Fazer uma auditoria gratuita
+      </a>
+    </div>
   </div>
 </body>
 </html>

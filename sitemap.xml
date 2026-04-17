@@ -4,17 +4,25 @@
    <!-- Página Principal -->
    <url>
       <loc>https://uaisoftware.com.br/</loc>
-      <lastmod>2026-04-16</lastmod>
+      <lastmod>2026-04-17</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
 
-   <!-- Página de Auditoria -->
+   <!-- Auditoria (Lead Magnet) -->
    <url>
       <loc>https://uaisoftware.com.br/auditoria.html</loc>
-      <lastmod>2026-04-16</lastmod>
+      <lastmod>2026-04-17</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.9</priority>
+   </url>
+
+   <!-- Página Google Ads Performance Max -->
+   <url>
+      <loc>https://uaisoftware.com.br/googleads-performancemax.html</loc>
+      <lastmod>2026-04-17</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
    </url>
 
 </urlset>

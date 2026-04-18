@@ -74,6 +74,8 @@
       backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       transition: padding .3s;
+      box-sizing: border-box;
+      overflow: hidden;
     }
     .nav-logo {
       font-family: var(--font-display);
@@ -131,6 +133,7 @@
 
     .hero-inner {
       max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -174,7 +177,7 @@
     .hero-sub {
       font-size: 1.15rem;
       color: var(--gray-400);
-      max-width: 480px;
+      max-width: 100%;
       margin-bottom: 40px;
       font-weight: 300;
     }
@@ -833,8 +836,20 @@
       .dash-label { display: none; }
       .ch-label { width: 50px; font-size: .68rem; }
       .ch-pct { width: 28px; font-size: .65rem; }
-      .nav-cta { font-size: .78rem; padding: 8px 14px; }
-      #hero { padding-top: 110px; }
+      /* Nav: esconder CTA, logo não corta */
+      .nav-cta { display: none; }
+      .nav-logo { font-size: 1rem; }
+      nav { padding: 14px 16px; overflow: visible; }
+      /* Hero: padding e texto contido */
+      #hero { padding: 90px 20px 60px; overflow: hidden; }
+      /* Botões full width */
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; box-sizing: border-box; }
+      /* Stats em wrap */
+      .hero-stats { flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+      .stat-n { font-size: 1.5rem; }
+      /* Parágrafos e sub contidos */
+      .hero-sub { font-size: 1rem; max-width: 100%; }
+      p { max-width: 100%; }
     }
   </style>
 </head>

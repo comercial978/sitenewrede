@@ -41,7 +41,7 @@
       --shadow-sm: 0 2px 16px rgba(0,0,0,0.18);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: var(--font-body);
@@ -238,7 +238,8 @@
       padding: 28px;
       box-shadow: 0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      max-width: 100%;
     }
     .dashboard::before {
       content: '';
@@ -307,7 +308,7 @@
       font-size: .82rem;
       padding: 10px 16px;
       border-radius: 100px;
-      top: -16px; right: -20px;
+      top: -16px; right: -20px; max-width: calc(100% - 20px);
       box-shadow: 0 8px 24px rgba(0,230,118,0.4);
       animation: float 3s ease-in-out infinite;
     }
@@ -802,7 +803,7 @@
       nav { padding: 14px 20px; }
       #hero { padding: 100px 20px 60px; }
       .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .hero-visual { order: -1; }
+      .hero-visual { order: -1; overflow: hidden; }
       .solucao-grid { grid-template-columns: 1fr; gap: 40px; }
       .planos-grid { grid-template-columns: 1fr; }
       .plano-card.destaque { transform: none; }
@@ -812,6 +813,10 @@
       #cta-final { padding: 80px 20px; }
       .form-row { grid-template-columns: 1fr; }
       .hero-stats { gap: 20px; }
+      .dashboard { padding: 20px 16px; }
+      .float-badge { right: 8px; top: -12px; font-size: .75rem; padding: 8px 12px; }
+      .orb-1 { width: 300px; height: 300px; right: -60px; }
+      .orb-2 { width: 220px; height: 220px; left: -60px; }
     }
 
     @media (max-width: 560px) {
@@ -821,6 +826,15 @@
       .processo-steps { grid-template-columns: 1fr; }
       .hero-ctas { flex-direction: column; }
       .cta-btns { flex-direction: column; align-items: center; }
+      .kpi { padding: 10px 8px; }
+      .kpi-value { font-size: 1.1rem; }
+      .kpi-label { font-size: .62rem; }
+      .kpi-delta { font-size: .65rem; }
+      .dash-label { display: none; }
+      .ch-label { width: 50px; font-size: .68rem; }
+      .ch-pct { width: 28px; font-size: .65rem; }
+      .nav-cta { font-size: .78rem; padding: 8px 14px; }
+      #hero { padding-top: 110px; }
     }
   </style>
 </head>

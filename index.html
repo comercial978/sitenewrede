@@ -1,27 +1,54 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Sites, Landing Pages e Automação | UAI Software</title>
-    <meta name="description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas. Solicite uma análise do seu site com a UAI Software.">
 
+    <!-- ===== SEO PRIMÁRIO ===== -->
+    <title>UAI Software — Criação de Sites, Landing Pages e Automação Digital | Desde 2004</title>
+    <meta name="description" content="UAI Software: criação de sites profissionais, landing pages, automação e SEO técnico para pequenas e médias empresas em todo o Brasil. Desde 2004 em Uberaba, MG. Solicite sua auditoria gratuita.">
+    <meta name="keywords" content="criação de sites, landing pages, automação empresarial, SEO técnico, UAI Software, desenvolvimento web, sites profissionais, Uberaba MG, soluções digitais, agência digital Brasil">
+    <meta name="author" content="UAI Software">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="geo.region" content="BR-MG">
+    <meta name="geo.placename" content="Uberaba, Minas Gerais, Brasil">
+
+    <!-- ===== CANONICAL ===== -->
     <link rel="canonical" href="https://uaisoftware.com.br/">
+
+    <!-- ===== OPEN GRAPH ===== -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="UAI Software">
-    <meta property="og:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
-    <meta property="og:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas. Solicite uma análise do seu site com a UAI Software.">
+    <meta property="og:title" content="UAI Software — Criação de Sites, Landing Pages e Automação Digital">
+    <meta property="og:description" content="Transformamos sites lentos em máquinas de captação de leads. Criação de sites, landing pages e automação para PMEs em todo o Brasil. Desde 2004.">
     <meta property="og:url" content="https://uaisoftware.com.br/">
     <meta property="og:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Criação de Sites, Landing Pages e Automação | UAI Software">
-    <meta name="twitter:description" content="Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.">
-    <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
-    <meta name="robots" content="index, follow">
+    <meta property="og:image:alt" content="UAI Software — Agência Digital desde 2004">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
 
-    <!-- Google Fonts: tipografia elegante e moderna -->
+    <!-- ===== TWITTER CARD ===== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@lgustavovguimaraes">
+    <meta name="twitter:creator" content="@lgustavovguimaraes">
+    <meta name="twitter:title" content="UAI Software — Criação de Sites, Landing Pages e Automação Digital">
+    <meta name="twitter:description" content="Transformamos sites lentos em máquinas de captação de leads. Auditoria gratuita em 24h. Atendimento para todo o Brasil.">
+    <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
+
+    <!-- ===== LINKS DO ECOSSISTEMA (rel=me fortalece entidade) ===== -->
+    <link rel="me" href="https://erp.uaisoftware.com.br">
+    <link rel="me" href="https://sistema.uaisoftware.com.br">
+    <link rel="me" href="https://rastreamentoveiculo.com.br">
+
+    <!-- ===== PRECONNECT & PERFORMANCE ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://formsubmit.co">
+
+    <!-- ===== FONTS (não-bloqueante) ===== -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"></noscript>
 <!-- Google tag (gtag.js) -->
@@ -965,16 +992,27 @@
 
     </style>
 
+    <!-- ===== SCHEMA MARKUP JSON-LD ===== -->
+
+    <!-- 1. Organization (entidade principal da marca) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
+      "@type": "Organization",
+      "@id": "https://uaisoftware.com.br/#organization",
       "name": "UAI Software",
+      "alternateName": ["UAI Software Agência Digital", "UAI Software Uberaba"],
       "url": "https://uaisoftware.com.br/",
-      "logo": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
+        "width": 300,
+        "height": 100
+      },
       "image": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
-      "description": "Criação de sites, landing pages, automação, SEO técnico e soluções digitais para empresas.",
-      "telephone": "+55-34-3073-9343",
+      "description": "UAI Software é uma agência digital fundada em 2004 em Uberaba, MG, especializada em criação de sites profissionais, landing pages, automação, SEO técnico e soluções digitais para pequenas e médias empresas em todo o Brasil.",
+      "foundingDate": "2004",
+      "telephone": ["+55-34-3073-9343", "+55-34-98897-7879"],
       "email": "comercial@uaisoftware.com.br",
       "address": {
         "@type": "PostalAddress",
@@ -982,28 +1020,175 @@
         "addressRegion": "MG",
         "addressCountry": "BR"
       },
-      "areaServed": "BR",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
       "serviceType": [
-        "Criação de sites",
-        "Landing pages",
-        "Automação",
-        "SEO técnico",
-        "Soluções digitais"
+        "Criação de Sites Profissionais",
+        "Landing Pages",
+        "Automação Empresarial",
+        "SEO Técnico",
+        "Google Ads Performance Max",
+        "Auditoria de Sites",
+        "Manutenção de Sites",
+        "Soluções Digitais para PMEs"
+      ],
+      "sameAs": [
+        "https://erp.uaisoftware.com.br",
+        "https://sistema.uaisoftware.com.br",
+        "https://rastreamentoveiculo.com.br",
+        "https://instagram.com/lgustavovguimaraes"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+55-34-98897-7879",
         "contactType": "sales",
-        "availableLanguage": ["Portuguese"]
+        "contactOption": "TollFree",
+        "availableLanguage": ["Portuguese"],
+        "areaServed": "BR"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Serviços Digitais UAI Software",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Criação de Sites Institucionais"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Landing Pages de Alta Conversão"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automação de Processos Digitais"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gestão de Google Ads Performance Max"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Auditoria Express Gratuita de Sites"}}
+        ]
       }
+    }
+    </script>
+
+    <!-- 2. LocalBusiness (fortalece SEO local Uberaba/MG) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://uaisoftware.com.br/#localbusiness",
+      "name": "UAI Software",
+      "url": "https://uaisoftware.com.br/",
+      "image": "https://uaisoftware.com.br/assets/uai-software-logo.webp",
+      "description": "Agência digital com mais de 20 anos de atuação em Uberaba, MG. Especializada em criação de sites, landing pages, automação e SEO para empresas em todo o Brasil.",
+      "telephone": "+55-34-3073-9343",
+      "email": "comercial@uaisoftware.com.br",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Uberaba",
+        "addressRegion": "Minas Gerais",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -19.7473,
+        "longitude": -47.9381
+      },
+      "areaServed": "BR",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "sameAs": "https://uaisoftware.com.br/#organization"
+    }
+    </script>
+
+    <!-- 3. WebSite (habilita Sitelinks Search Box no Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://uaisoftware.com.br/#website",
+      "name": "UAI Software",
+      "url": "https://uaisoftware.com.br/",
+      "description": "Site oficial da UAI Software — agência digital especializada em sites, landing pages, automação e SEO para empresas brasileiras.",
+      "publisher": {"@id": "https://uaisoftware.com.br/#organization"},
+      "inLanguage": "pt-BR",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://uaisoftware.com.br/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- 4. FAQPage (rich results Google para a seção FAQ) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto custa criar um site com a UAI Software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O valor varia conforme o escopo: número de páginas, funcionalidades, integrações e prazo. Trabalhamos com orçamentos a partir de projetos simples (landing pages) até sites completos com automação. Solicite uma análise gratuita — em até 24h enviamos uma proposta personalizada sem compromisso."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para entregar um site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Landing pages e sites de uma a três páginas são entregues em 5 a 10 dias úteis. Sites institucionais completos, entre 10 e 20 dias úteis. O prazo começa a contar após a aprovação do briefing e recebimento dos materiais."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vocês atendem fora de Uberaba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. 100% do atendimento é online — por WhatsApp, e-mail e videochamada. Atendemos empresas em todo o Brasil, de qualquer segmento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que é a Auditoria Express gratuita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "É um diagnóstico técnico e comercial do seu site atual: performance, SEO on-page, experiência mobile, credibilidade, conversão e CTAs. Entregamos um relatório em PDF em até 24h úteis, sem custo e sem compromisso de contratação."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Meu site atual pode ser aproveitado ou precisa ser refeito do zero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende do estado atual. Em muitos casos conseguimos otimizar o que existe (ajustes de SEO, velocidade, CTA e estrutura). Em outros, refazer é mais eficiente e econômico a longo prazo. A auditoria gratuita responde exatamente isso para o seu caso."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 5. BreadcrumbList (estrutura de navegação para o Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "UAI Software", "item": "https://uaisoftware.com.br/"},
+        {"@type": "ListItem", "position": 2, "name": "Serviços", "item": "https://uaisoftware.com.br/#servicos"},
+        {"@type": "ListItem", "position": 3, "name": "Projetos", "item": "https://uaisoftware.com.br/#projetos"},
+        {"@type": "ListItem", "position": 4, "name": "Auditoria Gratuita", "item": "https://uaisoftware.com.br/auditoria.html"}
+      ]
     }
     </script>
 
 </head>
 <body>
-
+    <!-- ===== HEADER (semântico — Google lê como cabeçalho do site) ===== -->
+    <header role="banner">
     <nav class="navbar" role="navigation" aria-label="Menu principal">
-        <a href="#" class="navbar-brand" aria-label="Página inicial"><img src="assets/uai-software-logo.webp" alt="UAI Software" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'"></a>
+        <a href="#" class="navbar-brand" aria-label="UAI Software — Página inicial"><img src="assets/uai-software-logo.webp" alt="UAI Software — Agência Digital desde 2004" width="160" height="54" loading="eager" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'"></a>
 
         <ul class="nav-links" id="desktopNav">
             <li><a href="#sobre">Sobre</a></li>
@@ -1032,15 +1217,18 @@
             <li><a href="#contato" class="mobile-link">Fale Conosco</a></li>
         </ul>
     </div>
+    </header><!-- /header -->
 
+    <!-- ===== MAIN (conteúdo principal indexável pelo Google) ===== -->
+    <main id="conteudo-principal" role="main">
 
     <!-- ===== HERO ===== -->
     
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-titulo">
         <div class="hero-inner">
             <span class="hero-badge">✦ Desde 2004 — Atendimento para todo o Brasil</span>
-            <h1>Transformamos sites lentos e esquecidos em máquinas de captação de leads.</h1>
-            <p>Criamos e otimizamos sites institucionais, landing pages e automações para pequenas e médias empresas que querem mais credibilidade, mais tráfego e mais clientes — sem complicar.</p>
+            <h1 id="hero-titulo">Transformamos sites lentos e esquecidos em <em>máquinas de captação de leads</em>.</h1>
+            <p>A <strong>UAI Software</strong> cria e otimiza sites institucionais, landing pages e automações para pequenas e médias empresas que querem mais credibilidade, mais tráfego e mais clientes — sem complicar.</p>
             <div class="hero-btns">
                 <a href="https://www.uaisoftware.com.br/auditoria.html" class="cta-button">Quero uma análise gratuita</a>
                 <a href="#briefing-google" class="cta-outline">Preencher briefing online</a>
@@ -1065,7 +1253,7 @@
         </div>
         <div class="uai-gads-copy">
           <p class="uai-gads-label">Google Ads · Performance Max</p>
-          <h2 class="uai-gads-headline">Apareça no Google e transforme buscas em clientes</h2>
+          <h2 class="uai-gads-headline" id="gads-titulo">Apareça no Google e transforme buscas em clientes</h2>
           <p class="uai-gads-sub">Gestão profissional de Google Ads com IA — sem desperdício de verba</p>
         </div>
         <div class="uai-gads-cta-col">
@@ -1178,8 +1366,8 @@
 
     <!-- ===== BENEFÍCIOS ===== -->
     
-    <section class="container" id="beneficios">
-        <h2 class="section-title">Por que otimizar seu site agora?</h2>
+    <section class="container" id="beneficios" aria-labelledby="beneficios-titulo">
+        <h2 class="section-title" id="beneficios-titulo">Por que otimizar seu site agora?</h2>
         <span class="section-divider"></span>
         <p class="section-subtitle" style="margin-top:14px;">Hoje, site lento, confuso ou mal posicionado faz a empresa perder credibilidade, tráfego e oportunidades comerciais.</p>
         <div class="benefits-grid">
@@ -1219,9 +1407,9 @@
 
     <!-- ===== SERVIÇOS ===== -->
     
-    <section class="services" id="servicos">
+    <section class="services" id="servicos" aria-labelledby="servicos-titulo">
         <div class="container">
-            <h2 class="section-title">Serviços em foco</h2>
+            <h2 class="section-title" id="servicos-titulo">Serviços em foco</h2>
             <span class="section-divider"></span>
             <p class="section-subtitle" style="margin-top:14px;">Soluções digitais para posicionar melhor sua empresa e transformar visita em oportunidade.</p>
             <div class="service-list">
@@ -1252,9 +1440,9 @@
 
     <!-- ===== DEPOIMENTOS ===== -->
     
-    <section class="portfolio-section" id="projetos">
+    <section class="portfolio-section" id="projetos" aria-labelledby="projetos-titulo">
         <div class="container">
-            <h2 class="section-title">Projetos e soluções em destaque</h2>
+            <h2 class="section-title" id="projetos-titulo">Projetos e soluções em destaque</h2>
             <span class="section-divider"></span>
             <p class="section-subtitle" style="margin-top:14px;">Trabalhos reais entregues para empresas de diferentes segmentos — sites, landing pages, auditorias e otimizações.</p>
             <div class="portfolio-grid">
@@ -1300,9 +1488,9 @@
 
     <!-- ===== DEPOIMENTOS ===== -->
 
-    <section id="depoimentos" style="background:#fff;">
+    <section id="depoimentos" style="background:#fff;" aria-labelledby="depoimentos-titulo">
         <div class="container">
-            <h2 class="section-title">O que nossos clientes dizem</h2>
+            <h2 class="section-title" id="depoimentos-titulo">O que nossos clientes dizem</h2>
             <span class="section-divider"></span>
             <p class="section-subtitle" style="margin-top:14px;">Resultados reais de quem já passou pela UAI Software.</p>
             <div class="depo-grid">
@@ -1366,9 +1554,9 @@
 
 
     <!-- ===== FAQ ===== -->
-    <section id="faq" style="background:#fff;">
+    <section id="faq" style="background:#fff;" aria-labelledby="faq-titulo">
         <div class="container">
-            <h2 class="section-title">Perguntas frequentes</h2>
+            <h2 class="section-title" id="faq-titulo">Perguntas frequentes</h2>
             <span class="section-divider"></span>
             <p class="section-subtitle" style="margin-top:14px;">Respondemos as dúvidas mais comuns antes mesmo de você precisar perguntar.</p>
             <div class="faq-list">
@@ -1584,19 +1772,19 @@
 
     <!-- ===== SOBRE ===== -->
 
-    <section id="sobre" style="background:#fff;">
+    <section id="sobre" style="background:#fff;" aria-labelledby="sobre-titulo">
         <div class="container">
-            <h2 class="section-title">Sobre a UAI Software</h2>
+            <h2 class="section-title" id="sobre-titulo">Sobre a UAI Software</h2>
             <span class="section-divider"></span>
             <div class="sobre-layout">
                 <div class="sobre-logo-box">
-                    <img src="assets/uai-software-logo.webp" alt="UAI Software" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'">
+                    <img src="assets/uai-software-logo.webp" alt="UAI Software — Agência Digital em Uberaba MG, fundada em 2004" width="220" height="80" loading="lazy" onerror="this.onerror=null;this.src='https://uaisoftware.com.br/assets/uai-software-logo.webp'">
                     <p style="margin-top:14px;font-size:.85rem;color:var(--text-muted);line-height:1.6;">Uberaba, MG<br>Atendimento online para todo o Brasil</p>
                 </div>
                 <div class="sobre-intro">
-                    <p>A <strong>UAI Software</strong> nasceu em 2004 com o propósito de unir tecnologia, proximidade e inteligência de negócio em soluções digitais que realmente geram valor para empresas.</p>
+                    <p>A <strong>UAI Software</strong> nasceu em 2004 em Uberaba, MG, com o propósito de unir tecnologia, proximidade e inteligência de negócio em soluções digitais que realmente geram valor para empresas.</p>
                     <br>
-                    <p>São mais de <strong>20 anos desenvolvendo sites, sistemas e automações</strong> para empresas de diferentes segmentos — sempre com foco em resultado prático, não em tecnologia pela tecnologia.</p>
+                    <p>São mais de <strong>20 anos desenvolvendo sites, sistemas e automações digitais</strong> para empresas de diferentes segmentos em todo o Brasil — sempre com foco em resultado prático, não em tecnologia pela tecnologia.</p>
                     <br>
                     <p>Mais do que uma expressão forte da identidade brasileira, o nome <strong>UAI</strong> carrega o significado que sustenta a essência da marca: <strong>Unidade, Apoio e Informação</strong>.</p>
                 </div>
@@ -1625,10 +1813,12 @@
         </div>
     </section>
 
+    </main><!-- /main -->
+
     <!-- ===== FOOTER ===== -->
-    <footer>
+    <footer role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
         <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px;">
-            <p style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.3px;color:#fff;">UAI Software</p>
+            <p style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-.3px;color:#fff;" itemprop="name">UAI Software</p>
             <p style="font-size:.95rem;opacity:.9;">Tecnologia que conecta, automatiza e impulsiona resultados.</p>
             <p style="font-size:.85rem;opacity:.7;">Criação de sites, automação e soluções digitais para empresas.</p>
             <p style="font-size:.85rem;opacity:.7;">Atendimento online para todo o Brasil.</p>
@@ -1656,6 +1846,12 @@
                 </a>
             </div>
             <hr style="width:100%;border:none;border-top:1px solid rgba(255,255,255,.12);margin:8px 0;">
+            <address style="font-style:normal;font-size:.8rem;opacity:.5;text-align:center;" itemscope itemtype="https://schema.org/PostalAddress">
+                <span itemprop="name">UAI Software</span> &mdash;
+                <span itemprop="addressLocality">Uberaba</span>,
+                <span itemprop="addressRegion">MG</span>,
+                <span itemprop="addressCountry">Brasil</span>
+            </address>
             <p style="font-size:.8rem;opacity:.5;">&copy; 2004-2026 UAI Software — Todos os direitos reservados.</p>
         </div>
     </footer>
@@ -1681,7 +1877,7 @@
             • monta botão mailto fallback com JS lendo os campos do form
          ===================================================================== -->
     
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <!-- JS principal -->
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {

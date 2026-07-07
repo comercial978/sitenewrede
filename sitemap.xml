@@ -4,7 +4,7 @@
    <!-- Página Principal -->
    <url>
       <loc>https://uaisoftware.com.br/</loc>
-      <lastmod>2026-04-17</lastmod>
+      <lastmod>2026-07-07</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
@@ -23,6 +23,49 @@
       <lastmod>2026-04-17</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
+   </url>
+
+   <!-- Matérias -->
+   <url>
+      <loc>https://uaisoftware.com.br/materias/</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+   </url>
+
+   <url>
+      <loc>https://uaisoftware.com.br/materias/por-que-seu-site-pode-estar-lento.html</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <url>
+      <loc>https://uaisoftware.com.br/materias/por-que-seu-site-nao-parece-seguro.html</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <url>
+      <loc>https://uaisoftware.com.br/materias/como-validamos-a-seguranca-do-site-da-sua-empresa.html</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <url>
+      <loc>https://uaisoftware.com.br/materias/seo-tecnico-para-aparecer-no-google.html</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <url>
+      <loc>https://uaisoftware.com.br/materias/landing-pages-e-automacao-para-gerar-leads.html</loc>
+      <lastmod>2026-07-07</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
    </url>
 
 </urlset>

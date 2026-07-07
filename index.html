@@ -450,6 +450,79 @@
         .service-item h4 { color: var(--purple-dark); margin-bottom: 8px; font-size: 1rem; }
         .service-item p { color: var(--text-muted); font-size: .88rem; }
 
+        /* ===== MATÉRIAS ===== */
+        .materias-section { background: #fff; }
+
+        .materias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .materia-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(102,126,234,.14);
+            border-radius: var(--radius-md);
+            padding: 26px 22px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .materia-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(224,123,32,.35);
+        }
+
+        .materia-tag {
+            display: inline-block;
+            font-size: .76rem;
+            font-weight: 700;
+            color: #17295f;
+            background: rgba(224,123,32,.12);
+            border: 1px solid rgba(224,123,32,.24);
+            border-radius: 50px;
+            padding: 4px 11px;
+            margin-bottom: 14px;
+        }
+
+        .materia-card h3 {
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .materia-card p {
+            color: var(--text-muted);
+            font-size: .9rem;
+            margin-bottom: 16px;
+        }
+
+        .materia-card a {
+            color: var(--purple-dark);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .materias-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .materias-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #365bdc, #764ba2);
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 26px rgba(54,91,220,.22);
+        }
+
         /* ===== STATS ===== */
         .stats {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1193,6 +1266,7 @@
         <ul class="nav-links" id="desktopNav">
             <li><a href="#sobre">Sobre</a></li>
             <li><a href="#servicos">Serviços</a></li>
+            <li><a href="materias/">Matérias</a></li>
             <li><a href="#projetos">Projetos</a></li>
             <li><a href="#depoimentos">Depoimentos</a></li>
             <li><a href="#faq">FAQ</a></li>
@@ -1210,6 +1284,7 @@
         <ul>
             <li><a href="#sobre" class="mobile-link">Sobre</a></li>
             <li><a href="#servicos" class="mobile-link">Serviços</a></li>
+            <li><a href="materias/" class="mobile-link">Matérias</a></li>
             <li><a href="#projetos" class="mobile-link">Projetos</a></li>
             <li><a href="#depoimentos" class="mobile-link">Depoimentos</a></li>
             <li><a href="https://sistema.uaisoftware.com.br" class="mobile-link" target="_blank" rel="noopener noreferrer">Sistema ERP</a></li>
@@ -1421,6 +1496,51 @@
                 <div class="service-item"><h4>🤖 Automações</h4><p>Fluxos digitais para formulários, atendimento, organização e produtividade.</p></div>
                 <div class="service-item"><h4>🧩 Manutenção e Evolução</h4><p>Correções, melhorias contínuas e suporte para manter o site vivo e confiável.</p></div>
                 <div class="service-item"><h4>📱 Presença Digital Integrada</h4><p>Quando necessário, alinhamos site, redes sociais e canais de contato em uma estratégia só.</p></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== MATÉRIAS ===== -->
+    <section class="materias-section" id="materias" aria-labelledby="materias-titulo">
+        <div class="container">
+            <h2 class="section-title" id="materias-titulo">Matérias para melhorar seu site</h2>
+            <span class="section-divider"></span>
+            <p class="section-subtitle" style="margin-top:14px;">Conteúdos práticos sobre velocidade, segurança, SEO técnico, landing pages e automação digital.</p>
+            <div class="materias-grid">
+                <article class="materia-card">
+                    <span class="materia-tag">Performance</span>
+                    <h3>Por que seu site pode estar lento</h3>
+                    <p>Entenda causas comuns de lentidão e como isso reduz contatos comerciais.</p>
+                    <a href="materias/por-que-seu-site-pode-estar-lento.html">Ler matéria</a>
+                </article>
+                <article class="materia-card">
+                    <span class="materia-tag">Segurança</span>
+                    <h3>Por que seu site pode não estar seguro</h3>
+                    <p>Veja riscos invisíveis que afetam confiança, formulários e reputação.</p>
+                    <a href="materias/por-que-seu-site-nao-parece-seguro.html">Ler matéria</a>
+                </article>
+                <article class="materia-card">
+                    <span class="materia-tag">Validação</span>
+                    <h3>Como validamos a segurança do site da sua empresa</h3>
+                    <p>Conheça uma análise responsável de HTTPS, scripts, formulários e exposição.</p>
+                    <a href="materias/como-validamos-a-seguranca-do-site-da-sua-empresa.html">Ler matéria</a>
+                </article>
+                <article class="materia-card">
+                    <span class="materia-tag">SEO técnico</span>
+                    <h3>O que impede seu site de aparecer melhor no Google</h3>
+                    <p>Indexação, estrutura, velocidade e links internos explicados de forma prática.</p>
+                    <a href="materias/seo-tecnico-para-aparecer-no-google.html">Ler matéria</a>
+                </article>
+                <article class="materia-card">
+                    <span class="materia-tag">Conversão</span>
+                    <h3>Landing pages e automação para gerar leads</h3>
+                    <p>Como transformar visitas em contatos com páginas focadas e fluxos simples.</p>
+                    <a href="materias/landing-pages-e-automacao-para-gerar-leads.html">Ler matéria</a>
+                </article>
+            </div>
+            <div class="materias-actions">
+                <a href="materias/">Ver todas as matérias</a>
             </div>
         </div>
     </section>

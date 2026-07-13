@@ -17,6 +17,14 @@
       <priority>0.9</priority>
    </url>
 
+   <!-- Segurança Cibernética -->
+   <url>
+      <loc>https://uaisoftware.com.br/seguranca-cibernetica.html</loc>
+      <lastmod>2026-07-13</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.9</priority>
+   </url>
+
    <!-- Página Google Ads Performance Max -->
    <url>
       <loc>https://uaisoftware.com.br/googleads-performancemax.html</loc>

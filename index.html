@@ -372,7 +372,7 @@
                         <p>Preencha quatro campos. Nossa equipe entra em contato para confirmar o diagnóstico.</p>
                     </div>
 
-                    <div class="form-success" id="form-success" role="status" aria-live="polite" hidden>
+                    <div class="form-success" id="form-success" role="status" aria-live="polite" tabindex="-1" hidden>
                         <i data-lucide="circle-check-big" aria-hidden="true"></i>
                         <div><strong>Solicitação recebida.</strong><span>Obrigado. Nossa equipe retornará em até 24 horas úteis.</span></div>
                         <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20acabei%20de%20solicitar%20a%20Auditoria%20Express%20pelo%20site." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="pos_formulario">Continuar pelo WhatsApp</a>
@@ -421,8 +421,17 @@
                         </label>
                         <span class="field-error" id="audit-consent-error"></span>
 
+                        <div class="form-feedback" id="form-feedback" role="status" aria-live="polite" hidden>
+                            <div>
+                                <strong id="form-feedback-title"></strong>
+                                <span id="form-feedback-message"></span>
+                            </div>
+                            <a id="form-feedback-whatsapp" href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20tentei%20solicitar%20a%20Auditoria%20Express%20pelo%20site%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="erro_formulario" hidden>Enviar pelo WhatsApp</a>
+                        </div>
+
                         <button class="button button--full" type="submit">
-                            Analisar meu site gratuitamente
+                            <span class="button__label">Analisar meu site gratuitamente</span>
+                            <span class="button__spinner" aria-hidden="true"></span>
                             <i data-lucide="arrow-right" aria-hidden="true"></i>
                         </button>
                         <p class="form-note"><i data-lucide="lock-keyhole" aria-hidden="true"></i> Seus dados são usados apenas para responder à solicitação.</p>

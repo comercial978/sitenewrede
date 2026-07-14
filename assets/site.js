@@ -252,6 +252,10 @@
     function initAuditForm() {
         var form = doc.getElementById("audit-form");
         var success = doc.getElementById("form-success");
+        var feedback = doc.getElementById("form-feedback");
+        var feedbackTitle = doc.getElementById("form-feedback-title");
+        var feedbackMessage = doc.getElementById("form-feedback-message");
+        var feedbackWhatsapp = doc.getElementById("form-feedback-whatsapp");
         if (!form) {
             return;
         }
@@ -261,8 +265,78 @@
         var fields = Array.prototype.slice.call(form.querySelectorAll("input[required]"));
         var phone = doc.getElementById("audit-phone");
         var url = doc.getElementById("audit-url");
+        var submitButton = form.querySelector("button[type='submit']");
+        var submitLabel = submitButton ? submitButton.querySelector(".button__label") : null;
+        var defaultSubmitLabel = submitLabel ? submitLabel.textContent : "";
         var started = false;
         var submitted = false;
+        var isSubmitting = false;
+
+        function setFeedback(type, title, message) {
+            if (!feedback) {
+                return;
+            }
+
+            feedback.classList.remove("is-pending", "is-error");
+            feedback.classList.add("is-" + type);
+            feedback.hidden = false;
+            if (feedbackTitle) {
+                feedbackTitle.textContent = title;
+            }
+            if (feedbackMessage) {
+                feedbackMessage.textContent = message;
+            }
+            if (feedbackWhatsapp) {
+                feedbackWhatsapp.hidden = type !== "error";
+            }
+        }
+
+        function setSubmittingState(active) {
+            isSubmitting = active;
+            if (!submitButton) {
+                return;
+            }
+
+            submitButton.disabled = active;
+            submitButton.classList.toggle("is-loading", active);
+            submitButton.setAttribute("aria-busy", active ? "true" : "false");
+            if (submitLabel) {
+                submitLabel.textContent = active ? "Enviando análise..." : defaultSubmitLabel;
+            }
+        }
+
+        function submitWithAjax() {
+            var controller = typeof AbortController === "function" ? new AbortController() : null;
+            var timeoutId = window.setTimeout(function () {
+                if (controller) {
+                    controller.abort();
+                }
+            }, 15000);
+            var payload = {};
+
+            new FormData(form).forEach(function (value, key) {
+                payload[key] = value;
+            });
+
+            return fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload),
+                signal: controller ? controller.signal : undefined
+            }).then(function (response) {
+                return response.json().catch(function () { return {}; }).then(function (data) {
+                    if (!response.ok || data.success === false) {
+                        throw new Error(data.message || "Falha ao enviar o formulário.");
+                    }
+                    return data;
+                });
+            }).finally(function () {
+                window.clearTimeout(timeoutId);
+            });
+        }
 
         if (phone) {
             phone.addEventListener("input", function () {
@@ -298,13 +372,18 @@
         }, { once: true });
 
         form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (isSubmitting) {
+                return;
+            }
+
             if (url) {
                 normalizeUrl(url);
             }
 
             var valid = fields.map(showFieldError).every(Boolean);
             if (!valid) {
-                event.preventDefault();
                 var firstInvalid = form.querySelector("[aria-invalid='true']");
                 if (firstInvalid) {
                     firstInvalid.focus();
@@ -313,10 +392,42 @@
                 return;
             }
 
-            submitted = true;
+            setSubmittingState(true);
+            setFeedback("pending", "Enviando sua solicitação...", "Aguarde alguns segundos enquanto confirmamos o recebimento.");
             track("audit_form_submit", {
                 form_name: "auditoria_express",
                 form_destination: "formsubmit"
+            });
+
+            submitWithAjax().then(function () {
+                submitted = true;
+                form.hidden = true;
+                if (feedback) {
+                    feedback.hidden = true;
+                }
+                if (success) {
+                    success.hidden = false;
+                    success.focus({ preventScroll: true });
+                }
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, "", window.location.pathname + "#auditoria");
+                }
+                track("audit_form_success", { form_name: "auditoria_express" });
+            }).catch(function (error) {
+                var timedOut = error && error.name === "AbortError";
+                setFeedback(
+                    "error",
+                    timedOut ? "O envio demorou mais que o esperado." : "Não foi possível confirmar o envio.",
+                    "Tente novamente ou envie a solicitação pelo WhatsApp. Seus dados permanecem preenchidos."
+                );
+                track("audit_form_error", {
+                    form_name: "auditoria_express",
+                    error_type: timedOut ? "timeout" : "request"
+                });
+            }).finally(function () {
+                if (!submitted) {
+                    setSubmittingState(false);
+                }
             });
         });
 

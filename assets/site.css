@@ -325,6 +325,42 @@ p {
     width: 100%;
 }
 
+.button:disabled,
+.button:disabled:hover {
+    color: var(--white);
+    background: var(--orange-600);
+    border-color: var(--orange-600);
+    box-shadow: none;
+    cursor: wait;
+    opacity: 0.86;
+    transform: none;
+}
+
+.button__spinner {
+    width: 18px;
+    height: 18px;
+    display: none;
+    flex: 0 0 auto;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: var(--white);
+    border-radius: 50%;
+    animation: button-spin 700ms linear infinite;
+}
+
+.button.is-loading .button__spinner {
+    display: block;
+}
+
+.button.is-loading > svg {
+    display: none;
+}
+
+@keyframes button-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .hero {
     position: relative;
     overflow: hidden;
@@ -1059,6 +1095,54 @@ p {
     color: var(--green-600);
     font-size: 12px;
     font-weight: 750;
+}
+
+.form-feedback {
+    margin: 16px 0;
+    padding: 13px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid #a9c6e5;
+    border-radius: 6px;
+    background: var(--blue-100);
+}
+
+.form-feedback[hidden],
+.form-feedback a[hidden] {
+    display: none;
+}
+
+.form-feedback strong,
+.form-feedback span {
+    display: block;
+}
+
+.form-feedback > div {
+    min-width: 0;
+}
+
+.form-feedback span {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.form-feedback a {
+    margin-left: auto;
+    flex: 0 0 auto;
+    color: #a61b12;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.form-feedback.is-error {
+    background: #fff1ef;
+    border-color: #e6aaa4;
+}
+
+.form-feedback.is-error strong {
+    color: #8f1911;
 }
 
 .solution-grid {
@@ -2321,6 +2405,15 @@ p {
     .form-success a {
         width: 100%;
         margin-left: 36px;
+    }
+
+    .form-feedback {
+        flex-wrap: wrap;
+    }
+
+    .form-feedback a {
+        width: 100%;
+        margin-left: 0;
     }
 
     .solution-card {

@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://formsubmit.co">
-    <link rel="stylesheet" href="assets/site.css?v=20260714-2">
+    <link rel="stylesheet" href="assets/site.css?v=20260714-3">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="UAI Software">
@@ -426,7 +426,7 @@
                                 <strong id="form-feedback-title"></strong>
                                 <span id="form-feedback-message"></span>
                             </div>
-                            <a id="form-feedback-whatsapp" href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20tentei%20solicitar%20a%20Auditoria%20Express%20pelo%20site%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="erro_formulario" hidden>Enviar pelo WhatsApp</a>
+                            <a id="form-feedback-whatsapp" href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20solicitar%20uma%20Auditoria%20Express." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="erro_formulario" hidden>Continuar pelo WhatsApp</a>
                         </div>
 
                         <button class="button button--full" type="submit">
@@ -719,18 +719,28 @@
                     feedback.hidden = false;
                 }
                 if (title) {
-                    title.textContent = "Não foi possível iniciar o envio.";
+                    title.textContent = "Vamos concluir pelo WhatsApp.";
                 }
                 if (message) {
-                    message.textContent = "Atualize a página e tente novamente ou envie a solicitação pelo WhatsApp.";
+                    message.textContent = "O envio automático está indisponível. Seus dados já estão preparados para continuar.";
                 }
                 if (whatsapp) {
+                    var data = new FormData(form);
+                    var text = [
+                        "Olá, quero concluir minha solicitação de Auditoria Express.",
+                        "",
+                        "Nome: " + (data.get("Nome") || ""),
+                        "Empresa: " + (data.get("Empresa") || ""),
+                        "WhatsApp: " + (data.get("WhatsApp") || ""),
+                        "Site: " + (data.get("URL do site") || "")
+                    ].join("\n");
+                    whatsapp.href = "https://wa.me/5534988977879?text=" + encodeURIComponent(text);
                     whatsapp.hidden = false;
                 }
             });
         }());
     </script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/site.js?v=20260714-2" defer></script>
+    <script src="assets/site.js?v=20260714-3" defer></script>
 </body>
 </html>

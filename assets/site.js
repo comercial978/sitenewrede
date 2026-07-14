@@ -272,6 +272,20 @@
         var submitted = false;
         var isSubmitting = false;
 
+        function whatsappFallbackUrl() {
+            var data = new FormData(form);
+            var message = [
+                "Olá, quero concluir minha solicitação de Auditoria Express.",
+                "",
+                "Nome: " + (data.get("Nome") || ""),
+                "Empresa: " + (data.get("Empresa") || ""),
+                "WhatsApp: " + (data.get("WhatsApp") || ""),
+                "Site: " + (data.get("URL do site") || "")
+            ].join("\n");
+
+            return "https://wa.me/5534988977879?text=" + encodeURIComponent(message);
+        }
+
         function setFeedback(type, title, message) {
             if (!feedback) {
                 return;
@@ -287,6 +301,9 @@
                 feedbackMessage.textContent = message;
             }
             if (feedbackWhatsapp) {
+                if (type === "error") {
+                    feedbackWhatsapp.href = whatsappFallbackUrl();
+                }
                 feedbackWhatsapp.hidden = type !== "error";
             }
         }
@@ -311,7 +328,7 @@
                 if (controller) {
                     controller.abort();
                 }
-            }, 15000);
+            }, 8000);
             var payload = {};
 
             new FormData(form).forEach(function (value, key) {
@@ -417,8 +434,10 @@
                 var timedOut = error && error.name === "AbortError";
                 setFeedback(
                     "error",
-                    timedOut ? "O envio demorou mais que o esperado." : "Não foi possível confirmar o envio.",
-                    "Tente novamente ou envie a solicitação pelo WhatsApp. Seus dados permanecem preenchidos."
+                    "Vamos concluir pelo WhatsApp.",
+                    timedOut
+                        ? "O envio automático demorou mais que o esperado. Seus dados já estão preparados para continuar."
+                        : "O envio automático está indisponível. Seus dados já estão preparados para continuar."
                 );
                 track("audit_form_error", {
                     form_name: "auditoria_express",

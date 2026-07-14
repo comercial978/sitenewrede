@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://formsubmit.co">
-    <link rel="stylesheet" href="assets/site.css">
+    <link rel="stylesheet" href="assets/site.css?v=20260714-2">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="UAI Software">
@@ -691,7 +691,46 @@
         <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20meu%20site." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="barra_mobile"><i data-lucide="message-circle" aria-hidden="true"></i><span>WhatsApp</span></a>
     </div>
 
+    <script>
+        (function () {
+            var form = document.getElementById("audit-form");
+            if (!form) {
+                return;
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (form.dataset.ajaxReady === "true") {
+                    return;
+                }
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                var feedback = document.getElementById("form-feedback");
+                var title = document.getElementById("form-feedback-title");
+                var message = document.getElementById("form-feedback-message");
+                var whatsapp = document.getElementById("form-feedback-whatsapp");
+                if (feedback) {
+                    feedback.classList.remove("is-pending");
+                    feedback.classList.add("is-error");
+                    feedback.hidden = false;
+                }
+                if (title) {
+                    title.textContent = "Não foi possível iniciar o envio.";
+                }
+                if (message) {
+                    message.textContent = "Atualize a página e tente novamente ou envie a solicitação pelo WhatsApp.";
+                }
+                if (whatsapp) {
+                    whatsapp.hidden = false;
+                }
+            });
+        }());
+    </script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/site.js" defer></script>
+    <script src="assets/site.js?v=20260714-2" defer></script>
 </body>
 </html>

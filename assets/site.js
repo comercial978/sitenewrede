@@ -431,6 +431,8 @@
             });
         });
 
+        form.dataset.ajaxReady = "true";
+
         window.addEventListener("pagehide", function () {
             if (started && !submitted) {
                 track("audit_form_abandon", {

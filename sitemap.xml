@@ -4,9 +4,25 @@
    <!-- Página Principal -->
    <url>
       <loc>https://uaisoftware.com.br/</loc>
-      <lastmod>2026-07-07</lastmod>
+      <lastmod>2026-07-14</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
+   </url>
+
+   <!-- Sobre a empresa -->
+   <url>
+      <loc>https://uaisoftware.com.br/sobre.html</loc>
+      <lastmod>2026-07-14</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <!-- Política de Privacidade -->
+   <url>
+      <loc>https://uaisoftware.com.br/politica-de-privacidade.html</loc>
+      <lastmod>2026-07-14</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.4</priority>
    </url>
 
    <!-- Auditoria (Lead Magnet) -->

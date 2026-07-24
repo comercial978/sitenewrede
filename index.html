@@ -17,6 +17,8 @@
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="dns-prefetch" href="https://formsubmit.co">
     <link rel="stylesheet" href="assets/site.css?v=20260714-3">
+    <link rel="stylesheet" href="/assets/analytics.css?v=20260724-1">
+    <script src="/assets/analytics.js?v=20260724-1"></script>
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="UAI Software">
@@ -30,27 +32,6 @@
     <meta name="twitter:title" content="UAI Software | Sites orientados a resultados">
     <meta name="twitter:description" content="Descubra gratuitamente o que impede seu site de gerar mais contatos e oportunidades.">
     <meta name="twitter:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ73CGV7X7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        var analyticsConsent = 'denied';
-        try {
-            analyticsConsent = localStorage.getItem('uai_analytics_consent') === 'granted' ? 'granted' : 'denied';
-        } catch (error) {
-            analyticsConsent = 'denied';
-        }
-        gtag('consent', 'default', {
-            analytics_storage: analyticsConsent,
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            wait_for_update: 500
-        });
-        gtag('js', new Date());
-        gtag('config', 'G-QZ73CGV7X7');
-    </script>
 
     <script type="application/ld+json">
     {
@@ -674,17 +655,6 @@
         </div>
         <div class="shell footer__bottom"><span>© 2004-<span id="current-year">2026</span> UAI Software. Todos os direitos reservados.</span><a href="#inicio">Voltar ao topo <i data-lucide="arrow-up" aria-hidden="true"></i></a></div>
     </footer>
-
-    <aside class="consent-banner" id="consent-banner" aria-labelledby="consent-title" hidden>
-        <div>
-            <strong id="consent-title">Privacidade e mensuração</strong>
-            <p>Usamos dados de navegação para entender o desempenho do site. Você pode aceitar a medição ou continuar apenas com recursos essenciais. <a href="politica-de-privacidade.html">Saiba mais</a>.</p>
-        </div>
-        <div class="consent-banner__actions">
-            <button type="button" class="button button--secondary button--small" data-consent="denied"><i data-lucide="x" aria-hidden="true"></i> Somente essenciais</button>
-            <button type="button" class="button button--small" data-consent="granted"><i data-lucide="check" aria-hidden="true"></i> Aceitar medição</button>
-        </div>
-    </aside>
 
     <div class="mobile-actions" aria-label="Ações rápidas">
         <a href="#auditoria" data-track="audit_click" data-label="barra_mobile"><i data-lucide="scan-search" aria-hidden="true"></i><span>Análise gratuita</span></a>

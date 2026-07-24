@@ -1,0 +1,139 @@
+.uai-privacy-panel,
+.uai-privacy-manage,
+.uai-privacy-button {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0;
+}
+
+.uai-privacy-panel[hidden],
+.uai-privacy-manage[hidden] {
+    display: none !important;
+}
+
+.uai-privacy-panel {
+    position: fixed;
+    z-index: 10000;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: min(760px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    margin: 0 auto;
+    padding: 18px;
+    overflow: auto;
+    color: #18212b;
+    background: #ffffff;
+    border: 1px solid #cbd5df;
+    border-radius: 8px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.24);
+}
+
+.uai-privacy-panel__copy {
+    min-width: 0;
+}
+
+.uai-privacy-panel__copy strong {
+    display: block;
+    margin: 0 0 6px;
+    color: #0b3f78;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.uai-privacy-panel__copy p {
+    margin: 0;
+    color: #3d4a57;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.uai-privacy-panel__copy a {
+    color: #0b3f78;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.uai-privacy-panel__actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+}
+
+.uai-privacy-button,
+.uai-privacy-manage {
+    min-height: 40px;
+    padding: 9px 14px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.uai-privacy-button--primary {
+    color: #ffffff;
+    background: #0b5f55;
+    border-color: #0b5f55;
+}
+
+.uai-privacy-button--secondary {
+    color: #243140;
+    background: #ffffff;
+    border-color: #98a6b5;
+}
+
+.uai-privacy-manage {
+    position: fixed;
+    z-index: 9999;
+    bottom: 12px;
+    left: 12px;
+    min-height: 32px;
+    padding: 6px 10px;
+    color: #ffffff;
+    background: #253240;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+}
+
+.uai-privacy-button:hover,
+.uai-privacy-manage:hover {
+    filter: brightness(0.94);
+}
+
+.uai-privacy-button:focus-visible,
+.uai-privacy-manage:focus-visible,
+.uai-privacy-panel__copy a:focus-visible {
+    outline: 3px solid #f0b429;
+    outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+    .uai-privacy-panel {
+        bottom: 76px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .uai-privacy-panel__actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .uai-privacy-button {
+        width: 100%;
+    }
+
+    .uai-privacy-manage {
+        bottom: 76px;
+    }
+}

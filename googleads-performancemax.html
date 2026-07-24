@@ -6,8 +6,11 @@
   <title>Google Ads Performance Max | UAI Software — Gestão Profissional com IA</title>
   <meta name="description" content="Apareça no Google no momento exato em que seu cliente está buscando. Gestão profissional de Google Ads Performance Max com IA. Setup completo, relatórios claros, sem fidelidade obrigatória." />
   <meta name="keywords" content="google ads, performance max, gestão de tráfego pago, marketing digital, uai software" />
+  <link rel="canonical" href="https://uaisoftware.com.br/googleads-performancemax.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/analytics.css?v=20260724-1" />
+  <script src="/assets/analytics.js?v=20260724-1"></script>
 
   <style>
     /* ─── RESET & TOKENS ─────────────────────────────────────────── */
@@ -1372,6 +1375,13 @@
     const msg = encodeURIComponent(
       `Olá! Me chamo ${name} e gostaria de solicitar o diagnóstico gratuito de Google Ads. Meu WhatsApp: ${phone}`
     );
+    if (typeof window.uaiTrack === 'function') {
+      window.uaiTrack('whatsapp_click', {
+        event_label: 'formulario_google_ads',
+        page_path: window.location.pathname,
+        transport_type: 'beacon'
+      });
+    }
     window.open(`https://wa.me/5534988977879?text=${msg}`, '_blank');
   }
 

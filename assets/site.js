@@ -495,44 +495,6 @@
         }, { passive: true });
     }
 
-    function initConsent() {
-        var banner = doc.getElementById("consent-banner");
-        if (!banner) {
-            return;
-        }
-
-        var choice = storageGet("uai_analytics_consent");
-        if (!choice) {
-            banner.hidden = false;
-            doc.body.classList.add("consent-open");
-        }
-
-        banner.addEventListener("click", function (event) {
-            var button = event.target.closest("[data-consent]");
-            if (!button) {
-                return;
-            }
-
-            var consent = button.getAttribute("data-consent");
-            storageSet("uai_analytics_consent", consent);
-            banner.hidden = true;
-            doc.body.classList.remove("consent-open");
-
-            if (typeof window.gtag === "function") {
-                window.gtag("consent", "update", {
-                    analytics_storage: consent,
-                    ad_storage: "denied",
-                    ad_user_data: "denied",
-                    ad_personalization: "denied"
-                });
-            }
-
-            if (consent === "granted") {
-                track("analytics_consent_granted", { consent_source: "site_banner" });
-            }
-        });
-    }
-
     function initDetailsTracking() {
         doc.querySelectorAll("details").forEach(function (details) {
             details.addEventListener("toggle", function () {
@@ -554,7 +516,6 @@
         initPortfolioFilters();
         initAuditForm();
         initScrollDepth();
-        initConsent();
         initDetailsTracking();
 
         var year = doc.getElementById("current-year");

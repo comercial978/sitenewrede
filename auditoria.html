@@ -11,22 +11,15 @@
     <meta property="og:title" content="Auditoria Express Gratuita | UAI Software">
     <meta property="og:description" content="Descubra por que seu site não converte. Auditoria técnica e comercial gratuita em até 24h.">
     <meta property="og:image" content="https://uaisoftware.com.br/assets/uai-software-logo.webp">
-    <meta property="og:url" content="https://uaisoftware.com.br/auditoria">
+    <meta property="og:url" content="https://uaisoftware.com.br/auditoria.html">
 
-    <link rel="canonical" href="https://uaisoftware.com.br/auditoria">
+    <link rel="canonical" href="https://uaisoftware.com.br/auditoria.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ73CGV7X7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-QZ73CGV7X7');
-    </script>
+    <link rel="stylesheet" href="/assets/analytics.css?v=20260724-1">
+    <script src="/assets/analytics.js?v=20260724-1"></script>
 
     <script type="application/ld+json">
     {
@@ -877,6 +870,21 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    function trackOnce(storageKey, eventName, parameters) {
+        var alreadyTracked = false;
+        try {
+            alreadyTracked = sessionStorage.getItem(storageKey) === '1';
+            if (!alreadyTracked) {
+                sessionStorage.setItem(storageKey, '1');
+            }
+        } catch (error) {
+            alreadyTracked = false;
+        }
+
+        if (!alreadyTracked && typeof window.uaiTrack === 'function') {
+            window.uaiTrack(eventName, parameters);
+        }
+    }
 
     // Define _next dinamicamente
     var formNext = document.getElementById('formNext');
@@ -889,6 +897,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (new URLSearchParams(window.location.search).get('enviado') === '1') {
         var obrigado = document.getElementById('obrigado');
         var form     = document.getElementById('auditForm');
+        trackOnce('uai_audit_success_tracked', 'audit_form_success', {
+            form_id: 'auditForm',
+            page_path: window.location.pathname
+        });
         if (obrigado && form) {
             form.style.display = 'none';
             obrigado.classList.add('visible');
@@ -899,7 +911,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Personaliza mensagem de sucesso com nome
     var auditForm = document.getElementById('auditForm');
     if (auditForm) {
+        auditForm.addEventListener('focusin', function () {
+            trackOnce('uai_audit_start_tracked', 'audit_form_start', {
+                form_id: 'auditForm',
+                page_path: window.location.pathname
+            });
+        });
+
         auditForm.addEventListener('submit', function () {
+            if (typeof window.uaiTrack === 'function') {
+                window.uaiTrack('audit_form_submit', {
+                    form_id: 'auditForm',
+                    page_path: window.location.pathname,
+                    transport_type: 'beacon'
+                });
+            }
             var nomeVal = document.getElementById('nome');
             if (nomeVal) {
                 var span = document.getElementById('nomeConfirm');

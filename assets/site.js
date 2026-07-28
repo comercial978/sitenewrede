@@ -214,11 +214,19 @@
             return "Preencha este campo para continuar.";
         }
 
-        if ((field.id === "audit-name" || field.id === "audit-company") && field.value.trim().length < 2) {
+        if (
+            (
+                field.id === "audit-name" ||
+                field.id === "audit-company" ||
+                field.id === "systems-lead-name" ||
+                field.id === "systems-lead-company"
+            ) &&
+            field.value.trim().length < 2
+        ) {
             return "Digite pelo menos 2 caracteres.";
         }
 
-        if (field.id === "audit-phone") {
+        if (field.id === "audit-phone" || field.id === "systems-lead-phone") {
             var digits = field.value.replace(/\D/g, "");
             if (digits.length < 10 || digits.length > 11) {
                 return "Informe um WhatsApp com DDD.";
@@ -470,6 +478,231 @@
         }
     }
 
+    function initSystemsLeadForm() {
+        var form = doc.getElementById("systems-lead-form");
+        var success = doc.getElementById("systems-form-success");
+        var feedback = doc.getElementById("systems-form-feedback");
+        var feedbackTitle = doc.getElementById("systems-form-feedback-title");
+        var feedbackMessage = doc.getElementById("systems-form-feedback-message");
+        var feedbackWhatsapp = doc.getElementById("systems-form-feedback-whatsapp");
+        if (!form) {
+            return;
+        }
+
+        readFirstTouch();
+
+        var fields = Array.prototype.slice.call(form.querySelectorAll("input[required], select[required], textarea[required]"));
+        var phone = doc.getElementById("systems-lead-phone");
+        var submitButton = form.querySelector("button[type='submit']");
+        var submitLabel = submitButton ? submitButton.querySelector(".button__label") : null;
+        var defaultSubmitLabel = submitLabel ? submitLabel.textContent : "";
+        var started = false;
+        var submitted = false;
+        var isSubmitting = false;
+
+        function whatsappFallbackUrl() {
+            var data = new FormData(form);
+            var message = [
+                "Olá, quero concluir minha solicitação sobre um sistema.",
+                "",
+                "Nome: " + (data.get("Nome") || ""),
+                "Empresa: " + (data.get("Empresa") || ""),
+                "WhatsApp: " + (data.get("WhatsApp") || ""),
+                "Segmento: " + (data.get("Segmento") || ""),
+                "Necessidade: " + (data.get("Necessidade principal") || "")
+            ].join("\n");
+
+            return "https://wa.me/5534988977879?text=" + encodeURIComponent(message);
+        }
+
+        function setFeedback(type, title, message) {
+            if (!feedback) {
+                return;
+            }
+
+            feedback.classList.remove("is-pending", "is-error");
+            feedback.classList.add("is-" + type);
+            feedback.hidden = false;
+            if (feedbackTitle) {
+                feedbackTitle.textContent = title;
+            }
+            if (feedbackMessage) {
+                feedbackMessage.textContent = message;
+            }
+            if (feedbackWhatsapp) {
+                if (type === "error") {
+                    feedbackWhatsapp.href = whatsappFallbackUrl();
+                }
+                feedbackWhatsapp.hidden = type !== "error";
+            }
+        }
+
+        function setSubmittingState(active) {
+            isSubmitting = active;
+            if (!submitButton) {
+                return;
+            }
+
+            submitButton.disabled = active;
+            submitButton.classList.toggle("is-loading", active);
+            submitButton.setAttribute("aria-busy", active ? "true" : "false");
+            if (submitLabel) {
+                submitLabel.textContent = active ? "Enviando solicitação..." : defaultSubmitLabel;
+            }
+        }
+
+        function submitWithAjax() {
+            var controller = typeof AbortController === "function" ? new AbortController() : null;
+            var timeoutId = window.setTimeout(function () {
+                if (controller) {
+                    controller.abort();
+                }
+            }, 8000);
+            var payload = {};
+
+            new FormData(form).forEach(function (value, key) {
+                payload[key] = value;
+            });
+
+            return fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload),
+                signal: controller ? controller.signal : undefined
+            }).then(function (response) {
+                return response.json().catch(function () { return {}; }).then(function (data) {
+                    if (!response.ok || data.success === false) {
+                        throw new Error(data.message || "Falha ao enviar o formulário.");
+                    }
+                    return data;
+                });
+            }).finally(function () {
+                window.clearTimeout(timeoutId);
+            });
+        }
+
+        if (phone) {
+            phone.addEventListener("input", function () {
+                phone.value = phoneMask(phone.value);
+                if (phone.getAttribute("aria-invalid") === "true") {
+                    showFieldError(phone);
+                }
+            });
+        }
+
+        fields.forEach(function (field) {
+            field.addEventListener("blur", function () { showFieldError(field); });
+            field.addEventListener("input", function () {
+                if (field.getAttribute("aria-invalid") === "true") {
+                    showFieldError(field);
+                }
+            });
+            field.addEventListener("change", function () { showFieldError(field); });
+        });
+
+        form.addEventListener("focusin", function () {
+            if (!started) {
+                started = true;
+                track("systems_lead_form_start", { form_name: "sistemas_microempresas" });
+            }
+        }, { once: true });
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (isSubmitting) {
+                return;
+            }
+
+            var valid = fields.map(showFieldError).every(Boolean);
+            if (!valid) {
+                var firstInvalid = form.querySelector("[aria-invalid='true']");
+                if (firstInvalid) {
+                    firstInvalid.focus();
+                }
+                track("systems_lead_form_error", {
+                    form_name: "sistemas_microempresas",
+                    error_type: "validation"
+                });
+                return;
+            }
+
+            setSubmittingState(true);
+            setFeedback("pending", "Enviando sua solicitação...", "Aguarde alguns segundos enquanto confirmamos o recebimento.");
+            track("systems_lead_form_submit", {
+                form_name: "sistemas_microempresas",
+                form_destination: "formsubmit"
+            });
+
+            submitWithAjax().then(function () {
+                submitted = true;
+                form.hidden = true;
+                if (feedback) {
+                    feedback.hidden = true;
+                }
+                if (success) {
+                    success.hidden = false;
+                    success.focus({ preventScroll: true });
+                }
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, "", window.location.pathname + "#contato-sistemas");
+                }
+                track("systems_lead_form_success", { form_name: "sistemas_microempresas" });
+                track("generate_lead", {
+                    form_name: "sistemas_microempresas",
+                    lead_type: "sistemas_microempresas"
+                });
+            }).catch(function (error) {
+                var timedOut = error && error.name === "AbortError";
+                setFeedback(
+                    "error",
+                    "Vamos concluir pelo WhatsApp.",
+                    timedOut
+                        ? "O envio automático demorou mais que o esperado. Seus dados já estão preparados para continuar."
+                        : "O envio automático está indisponível. Seus dados já estão preparados para continuar."
+                );
+                track("systems_lead_form_error", {
+                    form_name: "sistemas_microempresas",
+                    error_type: timedOut ? "timeout" : "request"
+                });
+            }).finally(function () {
+                if (!submitted) {
+                    setSubmittingState(false);
+                }
+            });
+        });
+
+        form.dataset.ajaxReady = "true";
+
+        window.addEventListener("pagehide", function () {
+            if (started && !submitted) {
+                track("systems_lead_form_abandon", {
+                    form_name: "sistemas_microempresas",
+                    transport_type: "beacon"
+                });
+            }
+        });
+
+        var query = new URLSearchParams(window.location.search);
+        if (query.get("sistemas") === "enviado" && success) {
+            submitted = true;
+            success.hidden = false;
+            form.hidden = true;
+            track("systems_lead_form_success", {
+                form_name: "sistemas_microempresas",
+                completion_method: "redirect"
+            });
+            track("generate_lead", {
+                form_name: "sistemas_microempresas",
+                lead_type: "sistemas_microempresas",
+                completion_method: "redirect"
+            });
+        }
+    }
+
     function initScrollDepth() {
         var milestones = [25, 50, 75, 90];
         var reached = {};
@@ -515,6 +748,7 @@
         initTrackingLinks();
         initPortfolioFilters();
         initAuditForm();
+        initSystemsLeadForm();
         initScrollDepth();
         initDetailsTracking();
 

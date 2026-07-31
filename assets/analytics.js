@@ -3,8 +3,10 @@
 
     var measurementId = "G-QZ73CGV7X7";
     var storageKey = "uai_analytics_consent";
+    var outreachSessionKey = "uai_outreach_visit";
     var productionHosts = ["uaisoftware.com.br", "www.uaisoftware.com.br"];
     var isProductionHost = productionHosts.indexOf(win.location.hostname) !== -1;
+    var sendPendingOutreach = function () {};
 
     function readConsent() {
         try {
@@ -75,6 +77,67 @@
         win.gtag("event", eventName, parameters || {});
     };
 
+    function readOutreachCampaign() {
+        var query;
+        var source;
+        var campaignId;
+        var content;
+        var allowedContent = ["sites", "sistemas", "google_ads", "seguranca", "geral"];
+
+        try {
+            query = new win.URLSearchParams(win.location.search);
+        } catch (error) {
+            return null;
+        }
+
+        source = (query.get("utm_source") || "").toLowerCase();
+        campaignId = (query.get("utm_id") || "").toUpperCase();
+        content = (query.get("utm_content") || "geral").toLowerCase();
+
+        if (source !== "formularios_sites" || !/^UAI-[0-9]{8}-[A-Z0-9]{6}$/.test(campaignId)) {
+            return null;
+        }
+
+        return {
+            id: campaignId,
+            content: allowedContent.indexOf(content) !== -1 ? content : "geral"
+        };
+    }
+
+    function initOutreachTracking() {
+        var campaign = readOutreachCampaign();
+
+        if (!campaign) {
+            return;
+        }
+
+        sendPendingOutreach = function () {
+            var trackedCampaign;
+
+            if (readConsent() !== "granted") {
+                return;
+            }
+
+            try {
+                trackedCampaign = win.sessionStorage.getItem(outreachSessionKey);
+                if (trackedCampaign === campaign.id) {
+                    return;
+                }
+                win.sessionStorage.setItem(outreachSessionKey, campaign.id);
+            } catch (error) {
+                trackedCampaign = null;
+            }
+
+            win.uaiTrack("outreach_visit", {
+                outreach_id: campaign.id,
+                service_interest: campaign.content,
+                page_path: win.location.pathname
+            });
+        };
+
+        sendPendingOutreach();
+    }
+
     function updateConsent(value, source) {
         var previousConsent = readConsent();
         saveConsent(value);
@@ -92,6 +155,7 @@
             win.uaiTrack("analytics_consent_granted", {
                 consent_source: source || "privacy_panel"
             });
+            sendPendingOutreach();
         }
     }
 
@@ -198,6 +262,7 @@
     }
 
     function init() {
+        initOutreachTracking();
         createPrivacyControls();
         initAutomaticTracking();
     }

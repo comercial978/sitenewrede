@@ -80,7 +80,7 @@
     function readOutreachCampaign() {
         var query;
         var source;
-        var campaignId;
+        var medium;
         var content;
         var allowedContent = ["sites", "sistemas", "google_ads", "seguranca", "geral"];
 
@@ -91,15 +91,15 @@
         }
 
         source = (query.get("utm_source") || "").toLowerCase();
-        campaignId = (query.get("utm_id") || "").toUpperCase();
+        medium = (query.get("utm_medium") || "").toLowerCase();
         content = (query.get("utm_content") || "geral").toLowerCase();
 
-        if (source !== "formularios_sites" || !/^UAI-[0-9]{8}-[A-Z0-9]{6}$/.test(campaignId)) {
+        if (source !== "formularios_sites" || medium !== "email") {
             return null;
         }
 
         return {
-            id: campaignId,
+            key: source + "|" + medium,
             content: allowedContent.indexOf(content) !== -1 ? content : "geral"
         };
     }
@@ -120,16 +120,16 @@
 
             try {
                 trackedCampaign = win.sessionStorage.getItem(outreachSessionKey);
-                if (trackedCampaign === campaign.id) {
+                if (trackedCampaign === campaign.key) {
                     return;
                 }
-                win.sessionStorage.setItem(outreachSessionKey, campaign.id);
+                win.sessionStorage.setItem(outreachSessionKey, campaign.key);
             } catch (error) {
                 trackedCampaign = null;
             }
 
             win.uaiTrack("outreach_visit", {
-                outreach_id: campaign.id,
+                outreach_source: "formularios_sites",
                 service_interest: campaign.content,
                 page_path: win.location.pathname
             });

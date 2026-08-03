@@ -73,6 +73,7 @@ Os eventos são enviados ao GA4 existente e também para `dataLayer` com o event
 | `audit_form_submit` | Envio válido para o serviço de formulário |
 | `audit_form_success` | Retorno à confirmação de envio |
 | `audit_form_abandon` | Saída após iniciar e antes de enviar |
+| `generate_lead` | Lead confirmado por qualquer formulário comercial |
 | `project_view` | Abertura de projeto publicado |
 | `portfolio_filter` | Uso dos filtros do portfólio |
 | `service_view` | Acesso a uma página de serviço |
@@ -83,9 +84,9 @@ Os eventos são enviados ao GA4 existente e também para `dataLayer` com o event
 
 ### Conversões recomendadas
 
-- Conversão principal: `audit_form_success`.
+- Conversão principal: `generate_lead`.
 - Conversão secundária: `whatsapp_click`.
-- Microconversões: `audit_form_start`, `audit_form_submit`, `project_view` e `briefing_click`.
+- Eventos de diagnóstico: `audit_form_start`, `audit_form_submit`, `audit_form_success`, `project_view` e `briefing_click`.
 
 O Google Ads pode importar as conversões do GA4 ou receber a tag diretamente pelo GTM. O ID do contêiner GTM e os IDs de conversão do Google Ads não foram adicionados porque não constavam no projeto.
 

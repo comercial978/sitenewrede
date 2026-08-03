@@ -131,6 +131,7 @@
             padding: clamp(60px, 10vw, 110px) 24px clamp(48px, 8vw, 80px);
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         /* radial glow behind hero */
@@ -325,6 +326,31 @@
 
         /* honeypot */
         .hp { display: none !important; }
+
+        .form-consent {
+            display: grid;
+            grid-template-columns: 18px minmax(0, 1fr);
+            gap: 10px;
+            align-items: start;
+            margin: 4px 0 16px;
+            color: #888;
+            font-size: .8rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .form-consent input {
+            width: 18px;
+            height: 18px;
+            margin: 1px 0 0;
+            accent-color: var(--orange);
+        }
+
+        .form-consent a {
+            color: #bbb;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
 
         /* submit button */
         .btn-submit {
@@ -686,7 +712,6 @@
                 id="auditForm"
                 action="https://formsubmit.co/comercial@uaisoftware.com.br"
                 method="POST"
-                novalidate
             >
                 <!-- FormSubmit config -->
                 <input type="hidden" name="_subject" value="🔍 Nova solicitação de Auditoria Express — UAI Software">
@@ -720,6 +745,11 @@
                     <label for="email">E-mail para receber a análise <span class="req">*</span></label>
                     <input type="email" id="email" name="Email" placeholder="seu@email.com.br" required autocomplete="email">
                 </div>
+
+                <label class="form-consent" for="consentimento">
+                    <input type="checkbox" id="consentimento" name="Consentimento" value="Aceito" required>
+                    <span>Autorizo o contato da UAI Software sobre esta solicitação e li a <a href="politica-de-privacidade.html">Política de Privacidade</a>.</span>
+                </label>
 
                 <button type="submit" class="btn-submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -898,30 +928,62 @@ document.addEventListener('DOMContentLoaded', function () {
         var obrigado = document.getElementById('obrigado');
         var form     = document.getElementById('auditForm');
         trackOnce('uai_audit_success_tracked', 'audit_form_success', {
-            form_id: 'auditForm',
+            form_name: 'auditoria_express_dedicada',
+            page_path: window.location.pathname
+        });
+        trackOnce('uai_generate_lead_tracked', 'generate_lead', {
+            form_name: 'auditoria_express_dedicada',
+            lead_type: 'auditoria_express',
             page_path: window.location.pathname
         });
         if (obrigado && form) {
             form.style.display = 'none';
             obrigado.classList.add('visible');
             obrigado.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', window.location.pathname + '#formulario');
+            }
         }
     }
 
     // Personaliza mensagem de sucesso com nome
     var auditForm = document.getElementById('auditForm');
     if (auditForm) {
+        var auditStarted = false;
+        var auditSubmitted = false;
+        var validationErrorTracked = false;
+
         auditForm.addEventListener('focusin', function () {
+            auditStarted = true;
             trackOnce('uai_audit_start_tracked', 'audit_form_start', {
-                form_id: 'auditForm',
+                form_name: 'auditoria_express_dedicada',
                 page_path: window.location.pathname
             });
         });
 
+        auditForm.addEventListener('input', function () {
+            validationErrorTracked = false;
+        });
+
+        auditForm.addEventListener('invalid', function () {
+            if (validationErrorTracked) {
+                return;
+            }
+            validationErrorTracked = true;
+            if (typeof window.uaiTrack === 'function') {
+                window.uaiTrack('audit_form_error', {
+                    form_name: 'auditoria_express_dedicada',
+                    error_type: 'validation',
+                    page_path: window.location.pathname
+                });
+            }
+        }, true);
+
         auditForm.addEventListener('submit', function () {
+            auditSubmitted = true;
             if (typeof window.uaiTrack === 'function') {
                 window.uaiTrack('audit_form_submit', {
-                    form_id: 'auditForm',
+                    form_name: 'auditoria_express_dedicada',
                     page_path: window.location.pathname,
                     transport_type: 'beacon'
                 });
@@ -930,6 +992,16 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nomeVal) {
                 var span = document.getElementById('nomeConfirm');
                 if (span) span.textContent = nomeVal.value.trim().split(' ')[0] + '!';
+            }
+        });
+
+        window.addEventListener('pagehide', function () {
+            if (auditStarted && !auditSubmitted && typeof window.uaiTrack === 'function') {
+                window.uaiTrack('audit_form_abandon', {
+                    form_name: 'auditoria_express_dedicada',
+                    page_path: window.location.pathname,
+                    transport_type: 'beacon'
+                });
             }
         });
     }

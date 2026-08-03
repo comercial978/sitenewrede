@@ -413,7 +413,10 @@
                 if (firstInvalid) {
                     firstInvalid.focus();
                 }
-                track("audit_form_error", { form_name: "auditoria_express" });
+                track("audit_form_error", {
+                    form_name: "auditoria_express",
+                    error_type: "validation"
+                });
                 return;
             }
 
@@ -438,6 +441,10 @@
                     window.history.replaceState(null, "", window.location.pathname + "#auditoria");
                 }
                 track("audit_form_success", { form_name: "auditoria_express" });
+                track("generate_lead", {
+                    form_name: "auditoria_express",
+                    lead_type: "auditoria_express"
+                });
             }).catch(function (error) {
                 var timedOut = error && error.name === "AbortError";
                 setFeedback(
@@ -475,6 +482,10 @@
             success.hidden = false;
             form.hidden = true;
             track("audit_form_success", { form_name: "auditoria_express" });
+            track("generate_lead", {
+                form_name: "auditoria_express",
+                lead_type: "auditoria_express"
+            });
         }
     }
 

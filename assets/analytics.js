@@ -81,8 +81,18 @@
         var query;
         var source;
         var medium;
+        var campaignName;
         var content;
-        var allowedContent = ["sites", "sistemas", "google_ads", "seguranca", "geral"];
+
+        function cleanValue(value, fallback) {
+            var cleaned = (value || fallback || "")
+                .toLowerCase()
+                .replace(/[^a-z0-9_-]+/g, "_")
+                .replace(/^_+|_+$/g, "")
+                .slice(0, 64);
+
+            return cleaned || fallback;
+        }
 
         try {
             query = new win.URLSearchParams(win.location.search);
@@ -90,22 +100,26 @@
             return null;
         }
 
-        source = (query.get("utm_source") || "").toLowerCase();
-        medium = (query.get("utm_medium") || "").toLowerCase();
-        content = (query.get("utm_content") || "geral").toLowerCase();
+        source = cleanValue(query.get("utm_source"), "email");
+        medium = cleanValue(query.get("utm_medium"), "");
+        campaignName = cleanValue(query.get("utm_campaign"), "prospeccao");
+        content = cleanValue(query.get("utm_content"), "geral");
 
-        if (source !== "formularios_sites" || medium !== "email") {
+        if (medium !== "email") {
             return null;
         }
 
         return {
-            key: source + "|" + medium,
-            content: allowedContent.indexOf(content) !== -1 ? content : "geral"
+            key: [source, medium, campaignName, content].join("|"),
+            source: source,
+            campaignName: campaignName,
+            content: content
         };
     }
 
     function initOutreachTracking() {
         var campaign = readOutreachCampaign();
+        var sentInPage = false;
 
         if (!campaign) {
             return;
@@ -114,7 +128,7 @@
         sendPendingOutreach = function () {
             var trackedCampaign;
 
-            if (readConsent() !== "granted") {
+            if (sentInPage) {
                 return;
             }
 
@@ -128,8 +142,10 @@
                 trackedCampaign = null;
             }
 
+            sentInPage = true;
             win.uaiTrack("outreach_visit", {
-                outreach_source: "formularios_sites",
+                outreach_source: campaign.source,
+                outreach_campaign: campaign.campaignName,
                 service_interest: campaign.content,
                 page_path: win.location.pathname
             });
@@ -172,10 +188,10 @@
         panel.innerHTML = [
             '<div class="uai-privacy-panel__copy">',
             '<strong id="uai-privacy-title">Privacidade e mensura\u00e7\u00e3o</strong>',
-            '<p id="uai-privacy-description">Usamos dados de navega\u00e7\u00e3o para entender o desempenho do site. Voc\u00ea pode aceitar a medi\u00e7\u00e3o ou continuar apenas com recursos essenciais. <a href="/politica-de-privacidade.html">Saiba mais</a>.</p>',
+            '<p id="uai-privacy-description">Usamos medi\u00e7\u00f5es sem cookies para estat\u00edsticas b\u00e1sicas. Com sua autoriza\u00e7\u00e3o, ativamos cookies anal\u00edticos para entender melhor a navega\u00e7\u00e3o. <a href="/politica-de-privacidade.html">Saiba mais</a>.</p>',
             "</div>",
             '<div class="uai-privacy-panel__actions">',
-            '<button type="button" class="uai-privacy-button uai-privacy-button--secondary" data-uai-consent="denied">Somente essenciais</button>',
+            '<button type="button" class="uai-privacy-button uai-privacy-button--secondary" data-uai-consent="denied">Continuar sem cookies</button>',
             '<button type="button" class="uai-privacy-button uai-privacy-button--primary" data-uai-consent="granted">Aceitar medi\u00e7\u00e3o</button>',
             "</div>"
         ].join("");

@@ -22,12 +22,6 @@
         return true;
     }
 
-    function initIcons() {
-        if (window.lucide && typeof window.lucide.createIcons === "function") {
-            window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
-        }
-    }
-
     function track(eventName, parameters) {
         var details = parameters || {};
         window.dataLayer = window.dataLayer || [];
@@ -753,7 +747,6 @@
     }
 
     function init() {
-        initIcons();
         initNavigation();
         initReveal();
         initTrackingLinks();

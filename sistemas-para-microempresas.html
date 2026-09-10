@@ -15,7 +15,7 @@
     <link rel="preload" href="assets/projetos/sistema-erp.webp" as="image" type="image/webp">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://formsubmit.co">
-    <link rel="stylesheet" href="assets/site.css?v=20260805-1">
+    <link rel="stylesheet" href="assets/site.css?v=20260910-1">
     <link rel="stylesheet" href="/assets/analytics.css?v=20260724-1">
     <script src="/assets/analytics.js?v=20260904-1"></script>
 
@@ -324,7 +324,7 @@
                     <div class="form-heading">
                         <span><svg class="lucide lucide-messages-square" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/assets/lucide-icons.svg#messages-square"></use></svg> Fale com um especialista</span>
                         <h3>Qual rotina você precisa organizar?</h3>
-                        <p>Preencha os dados abaixo. Retornaremos para entender o cenário da empresa.</p>
+                        <p>Informe nome, WhatsApp e segmento. Os demais campos são opcionais.</p>
                     </div>
 
                     <div class="form-success" id="systems-form-success" tabindex="-1" hidden>
@@ -358,11 +358,6 @@
                                 <span class="field-error" id="systems-lead-name-error" aria-live="polite"></span>
                             </div>
                             <div class="form-field">
-                                <label for="systems-lead-company">Empresa</label>
-                                <input id="systems-lead-company" name="Empresa" type="text" autocomplete="organization" placeholder="Nome da empresa" required aria-describedby="systems-lead-company-error">
-                                <span class="field-error" id="systems-lead-company-error" aria-live="polite"></span>
-                            </div>
-                            <div class="form-field">
                                 <label for="systems-lead-phone">WhatsApp com DDD</label>
                                 <input id="systems-lead-phone" name="WhatsApp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(34) 99999-9999" required aria-describedby="systems-lead-phone-error">
                                 <span class="field-error" id="systems-lead-phone-error" aria-live="polite"></span>
@@ -380,11 +375,16 @@
                                 </select>
                                 <span class="field-error" id="systems-lead-segment-error" aria-live="polite"></span>
                             </div>
+                            <div class="form-field">
+                                <label for="systems-lead-company">Empresa <span class="field-optional">(opcional)</span></label>
+                                <input id="systems-lead-company" name="Empresa" type="text" autocomplete="organization" placeholder="Nome da empresa" minlength="2" aria-describedby="systems-lead-company-error">
+                                <span class="field-error" id="systems-lead-company-error" aria-live="polite"></span>
+                            </div>
                         </div>
 
                         <div class="form-field">
-                            <label for="systems-lead-need">O que você precisa organizar?</label>
-                            <textarea id="systems-lead-need" name="Necessidade principal" rows="4" placeholder="Ex.: vendas, estoque e contas a receber" required aria-describedby="systems-lead-need-error"></textarea>
+                            <label for="systems-lead-need">O que você precisa organizar? <span class="field-optional">(opcional)</span></label>
+                            <textarea id="systems-lead-need" name="Necessidade principal" rows="4" placeholder="Ex.: vendas, estoque e contas a receber" aria-describedby="systems-lead-need-error"></textarea>
                             <span class="field-error" id="systems-lead-need-error" aria-live="polite"></span>
                         </div>
 
@@ -422,6 +422,6 @@
         <a href="#contato-sistemas" data-track="systems_lead_click" data-label="barra_mobile_sistemas"><svg class="lucide lucide-clipboard-list" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/assets/lucide-icons.svg#clipboard-list"></use></svg><span>Avaliar sistema</span></a>
         <a href="https://wa.me/5534988977879?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20sistema%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-label="barra_mobile_sistemas"><svg class="lucide lucide-message-circle" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/assets/lucide-icons.svg#message-circle"></use></svg><span>WhatsApp</span></a>
     </nav>
-    <script src="assets/site.js?v=20260904-1" defer></script>
+    <script src="assets/site.js?v=20260910-1" defer></script>
 </body>
 </html>

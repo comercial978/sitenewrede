@@ -430,6 +430,29 @@ p {
     gap: 12px;
 }
 
+.hero__whatsapp {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--blue-800);
+    font-size: 14px;
+    font-weight: 750;
+    text-decoration: underline;
+    text-decoration-color: rgba(15, 90, 166, 0.35);
+    text-underline-offset: 4px;
+}
+
+.hero__whatsapp:hover {
+    color: var(--orange-600);
+    text-decoration-color: currentColor;
+}
+
+.hero__whatsapp svg {
+    width: 18px;
+    height: 18px;
+}
+
 .microcopy {
     margin-top: 14px;
     display: flex;
@@ -980,12 +1003,22 @@ p {
     margin-bottom: 16px;
 }
 
+.form-field[hidden] {
+    display: none;
+}
+
 .form-field label {
     margin-bottom: 6px;
     display: block;
     color: #29374a;
     font-size: 13px;
     font-weight: 750;
+}
+
+.field-optional {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .form-field input {
@@ -3045,6 +3078,10 @@ p {
 
     .hero__actions .button {
         width: 100%;
+    }
+
+    .hero__whatsapp {
+        display: none;
     }
 
     .hero__proof {

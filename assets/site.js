@@ -104,10 +104,15 @@
                 return;
             }
 
-            track(target.getAttribute("data-track"), {
+            var parameters = {
                 event_label: target.getAttribute("data-label") || "sem_identificacao",
                 link_url: target.getAttribute("href") || ""
-            });
+            };
+            var interest = target.getAttribute("data-interest");
+            if (interest) {
+                parameters.service_interest = interest;
+            }
+            track(target.getAttribute("data-track"), parameters);
         });
     }
 
@@ -215,6 +220,7 @@
                 field.id === "systems-lead-name" ||
                 field.id === "systems-lead-company"
             ) &&
+            field.value.trim() &&
             field.value.trim().length < 2
         ) {
             return "Digite pelo menos 2 caracteres.";
@@ -264,21 +270,78 @@
 
         readFirstTouch();
 
-        var fields = Array.prototype.slice.call(form.querySelectorAll("input[required]"));
+        var fields = Array.prototype.slice.call(form.querySelectorAll(".form-field input, .form-field select, .form-field textarea, .consent input"));
+        var interest = doc.getElementById("audit-interest");
         var phone = doc.getElementById("audit-phone");
         var url = doc.getElementById("audit-url");
+        var urlField = doc.getElementById("audit-url-field");
         var submitButton = form.querySelector("button[type='submit']");
         var submitLabel = submitButton ? submitButton.querySelector(".button__label") : null;
         var defaultSubmitLabel = submitLabel ? submitLabel.textContent : "";
         var started = false;
         var submitted = false;
         var isSubmitting = false;
+        var query = new URLSearchParams(window.location.search);
+
+        function interestValue() {
+            return interest ? interest.value : "";
+        }
+
+        function interestLabel() {
+            if (!interest || interest.selectedIndex < 0) {
+                return "";
+            }
+            return interest.options[interest.selectedIndex].text;
+        }
+
+        function updateUrlField() {
+            if (!interest || !url || !urlField) {
+                return;
+            }
+
+            var websiteServices = ["melhorar_site", "google_ads", "seguranca"];
+            var needsWebsite = websiteServices.indexOf(interest.value) !== -1;
+            urlField.hidden = !needsWebsite;
+            url.required = needsWebsite;
+
+            if (!needsWebsite) {
+                url.value = "";
+                url.setAttribute("aria-invalid", "false");
+                var error = doc.getElementById("audit-url-error");
+                if (error) {
+                    error.textContent = "";
+                }
+            }
+        }
+
+        function selectInterest(value) {
+            if (!interest || !value) {
+                return;
+            }
+
+            var validOption = Array.prototype.some.call(interest.options, function (option) {
+                return option.value === value;
+            });
+            if (validOption) {
+                interest.value = value;
+                updateUrlField();
+            }
+        }
+
+        function formTrackingDetails(additional) {
+            return Object.assign({
+                form_name: "auditoria_express",
+                form_variant: "project_diagnostic_v2",
+                service_interest: interestValue() || "nao_informado"
+            }, additional || {});
+        }
 
         function whatsappFallbackUrl() {
             var data = new FormData(form);
             var message = [
-                "Olá, quero concluir minha solicitação de Auditoria Express.",
+                "Olá, quero concluir uma solicitação pelo site.",
                 "",
+                "Interesse: " + interestLabel(),
                 "Nome: " + (data.get("Nome") || ""),
                 "Empresa: " + (data.get("Empresa") || ""),
                 "WhatsApp: " + (data.get("WhatsApp") || ""),
@@ -320,7 +383,7 @@
             submitButton.classList.toggle("is-loading", active);
             submitButton.setAttribute("aria-busy", active ? "true" : "false");
             if (submitLabel) {
-                submitLabel.textContent = active ? "Enviando análise..." : defaultSubmitLabel;
+                submitLabel.textContent = active ? "Enviando solicitação..." : defaultSubmitLabel;
             }
         }
 
@@ -373,6 +436,28 @@
             });
         }
 
+        if (interest) {
+            interest.addEventListener("change", function () {
+                updateUrlField();
+                if (interest.value) {
+                    track("lead_intent_select", {
+                        form_name: "auditoria_express",
+                        form_variant: "project_diagnostic_v2",
+                        service_interest: interest.value
+                    });
+                }
+            });
+        }
+
+        selectInterest(query.get("interesse"));
+        updateUrlField();
+
+        doc.querySelectorAll("a[href='#auditoria'][data-interest]").forEach(function (link) {
+            link.addEventListener("click", function () {
+                selectInterest(link.getAttribute("data-interest"));
+            });
+        });
+
         fields.forEach(function (field) {
             field.addEventListener("blur", function () { showFieldError(field); });
             field.addEventListener("input", function () {
@@ -386,7 +471,7 @@
         form.addEventListener("focusin", function () {
             if (!started) {
                 started = true;
-                track("audit_form_start", { form_name: "auditoria_express" });
+                track("audit_form_start", formTrackingDetails());
             }
         }, { once: true });
 
@@ -407,19 +492,17 @@
                 if (firstInvalid) {
                     firstInvalid.focus();
                 }
-                track("audit_form_error", {
-                    form_name: "auditoria_express",
+                track("audit_form_error", formTrackingDetails({
                     error_type: "validation"
-                });
+                }));
                 return;
             }
 
             setSubmittingState(true);
             setFeedback("pending", "Enviando sua solicitação...", "Aguarde alguns segundos enquanto confirmamos o recebimento.");
-            track("audit_form_submit", {
-                form_name: "auditoria_express",
+            track("audit_form_submit", formTrackingDetails({
                 form_destination: "formsubmit"
-            });
+            }));
 
             submitWithAjax().then(function () {
                 submitted = true;
@@ -434,11 +517,10 @@
                 if (window.history && window.history.replaceState) {
                     window.history.replaceState(null, "", window.location.pathname + "#auditoria");
                 }
-                track("audit_form_success", { form_name: "auditoria_express" });
-                track("generate_lead", {
-                    form_name: "auditoria_express",
-                    lead_type: "auditoria_express"
-                });
+                track("audit_form_success", formTrackingDetails());
+                track("generate_lead", formTrackingDetails({
+                    lead_type: interestValue() || "contato_geral"
+                }));
             }).catch(function (error) {
                 var timedOut = error && error.name === "AbortError";
                 setFeedback(
@@ -448,10 +530,9 @@
                         ? "O envio automático demorou mais que o esperado. Seus dados já estão preparados para continuar."
                         : "O envio automático está indisponível. Seus dados já estão preparados para continuar."
                 );
-                track("audit_form_error", {
-                    form_name: "auditoria_express",
+                track("audit_form_error", formTrackingDetails({
                     error_type: timedOut ? "timeout" : "request"
-                });
+                }));
             }).finally(function () {
                 if (!submitted) {
                     setSubmittingState(false);
@@ -463,23 +544,23 @@
 
         window.addEventListener("pagehide", function () {
             if (started && !submitted) {
-                track("audit_form_abandon", {
-                    form_name: "auditoria_express",
+                track("audit_form_abandon", formTrackingDetails({
                     transport_type: "beacon"
-                });
+                }));
             }
         });
 
-        var query = new URLSearchParams(window.location.search);
-        if (query.get("auditoria") === "enviada" && success) {
+        if ((query.get("contato") === "enviado" || query.get("auditoria") === "enviada") && success) {
             submitted = true;
             success.hidden = false;
             form.hidden = true;
-            track("audit_form_success", { form_name: "auditoria_express" });
-            track("generate_lead", {
-                form_name: "auditoria_express",
-                lead_type: "auditoria_express"
-            });
+            track("audit_form_success", formTrackingDetails({
+                completion_method: "redirect"
+            }));
+            track("generate_lead", formTrackingDetails({
+                lead_type: interestValue() || "contato_geral",
+                completion_method: "redirect"
+            }));
         }
     }
 

@@ -7,6 +7,8 @@
   <meta name="description" content="Apareça no Google no momento exato em que seu cliente está buscando. Gestão profissional de Google Ads Performance Max com IA. Setup completo, relatórios claros, sem fidelidade obrigatória." />
   <meta name="keywords" content="google ads, performance max, gestão de tráfego pago, marketing digital, uai software" />
   <link rel="canonical" href="https://uaisoftware.com.br/googleads-performancemax.html" />
+  <link rel="icon" href="assets/uai-software-logo.webp" type="image/webp" />
+  <link rel="preload" href="assets/uai-software-logo.webp" as="image" type="image/webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/analytics.css?v=20260724-1" />
@@ -81,14 +83,20 @@
       overflow: hidden;
     }
     .nav-logo {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: var(--white);
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
       text-decoration: none;
-      letter-spacing: -.02em;
     }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo img {
+      display: block;
+      width: 168px;
+      height: auto;
+      border-radius: 4px;
+    }
     nav a.nav-cta {
       background: var(--accent);
       color: var(--blue-950);
@@ -841,8 +849,8 @@
       .ch-pct { width: 28px; font-size: .65rem; }
       /* Nav: esconder CTA, logo não corta */
       .nav-cta { display: none; }
-      .nav-logo { font-size: 1rem; }
-      nav { padding: 14px 16px; overflow: visible; }
+      .nav-logo img { width: 140px; }
+      nav { padding: 9px 16px; overflow: visible; }
       /* Hero: padding e texto contido */
       #hero { padding: 90px 20px 60px; overflow: hidden; }
       /* Botões full width */
@@ -860,7 +868,9 @@
 
 <!-- ─── NAV ──────────────────────────────────────────────────────────── -->
 <nav>
-  <a href="https://uaisoftware.com.br" class="nav-logo">UAI <span>SOFTWARE</span></a>
+  <a href="https://uaisoftware.com.br" class="nav-logo" aria-label="UAI Software, página inicial">
+    <img src="assets/uai-software-logo.webp" alt="UAI Software" width="819" height="295" fetchpriority="high" />
+  </a>
   <a href="#cta-final" class="nav-cta">Falar no WhatsApp →</a>
 </nav>
 

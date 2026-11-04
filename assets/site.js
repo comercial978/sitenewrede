@@ -140,6 +140,83 @@
         });
     }
 
+    function initClientSelector() {
+        var selector = doc.getElementById("client-selector");
+        var emptyState = doc.getElementById("client-empty");
+        var profiles = Array.prototype.slice.call(doc.querySelectorAll("[data-client-profile]"));
+        var baseTitle = doc.title;
+
+        if (!selector || !profiles.length) {
+            return;
+        }
+
+        function selectedFromUrl() {
+            return new URLSearchParams(window.location.search).get("cliente") || "";
+        }
+
+        function updateUrl(clientId) {
+            var url = new URL(window.location.href);
+            if (clientId) {
+                url.searchParams.set("cliente", clientId);
+            } else {
+                url.searchParams.delete("cliente");
+            }
+            window.history.pushState({}, "", url.pathname + url.search + url.hash);
+        }
+
+        function showClient(clientId, options) {
+            var settings = options || {};
+            var activeProfile = null;
+
+            profiles.forEach(function (profile) {
+                var active = profile.getAttribute("data-client-profile") === clientId;
+                profile.hidden = !active;
+                if (active) {
+                    activeProfile = profile;
+                }
+            });
+
+            if (!activeProfile) {
+                clientId = "";
+            }
+
+            selector.value = clientId;
+            emptyState.hidden = Boolean(activeProfile);
+            doc.title = activeProfile
+                ? activeProfile.querySelector("h2").textContent + " | Clientes UAI Software"
+                : baseTitle;
+
+            if (settings.updateUrl) {
+                updateUrl(clientId);
+            }
+
+            if (activeProfile) {
+                track("client_profile_view", {
+                    client_id: clientId,
+                    service_category: activeProfile.getAttribute("data-category") || "nao_informada"
+                });
+
+                if (settings.moveFocus) {
+                    activeProfile.focus({ preventScroll: true });
+                    activeProfile.scrollIntoView({
+                        behavior: reducedMotion ? "auto" : "smooth",
+                        block: "start"
+                    });
+                }
+            }
+        }
+
+        selector.addEventListener("change", function () {
+            showClient(selector.value, { updateUrl: true, moveFocus: true });
+        });
+
+        window.addEventListener("popstate", function () {
+            showClient(selectedFromUrl());
+        });
+
+        showClient(selectedFromUrl());
+    }
+
     function readFirstTouch() {
         var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
         var params = new URLSearchParams(window.location.search);
@@ -832,6 +909,7 @@
         initReveal();
         initTrackingLinks();
         initPortfolioFilters();
+        initClientSelector();
         initAuditForm();
         initSystemsLeadForm();
         initScrollDepth();

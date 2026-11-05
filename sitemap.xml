@@ -4,7 +4,7 @@
    <!-- Página Principal -->
    <url>
       <loc>https://uaisoftware.com.br/</loc>
-      <lastmod>2026-11-04</lastmod>
+      <lastmod>2026-11-05</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
@@ -28,7 +28,7 @@
    <!-- Clientes atendidos -->
    <url>
       <loc>https://uaisoftware.com.br/clientes.html</loc>
-      <lastmod>2026-11-04</lastmod>
+      <lastmod>2026-11-05</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>

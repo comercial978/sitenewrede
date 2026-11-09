@@ -298,7 +298,7 @@
             if (controller) {
                 controller.abort();
             }
-        }, 9000);
+        }, 15000);
 
         fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
             method: "POST",

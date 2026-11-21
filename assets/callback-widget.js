@@ -100,7 +100,7 @@
         '        </div>',
         '        <label class="uai-callback__consent">',
         '          <input id="uai-callback-consent" name="Consentimento" type="checkbox" value="Aceito" required>',
-        '          <span>Autorizo o contato da UAI Software sobre esta solicitação. <a href="/politica-de-privacidade.html">Privacidade</a>.</span>',
+        '          <span>Autorizo o contato da UAI Software sobre esta solicitação. <a href="https://uaisoftware.com.br/politica-de-privacidade.html">Privacidade</a>.</span>',
         '        </label>',
         '        <p class="uai-callback__error" id="uai-callback-consent-error" aria-live="polite"></p>',
         '        <button class="uai-callback__submit" id="uai-callback-submit" type="submit"><span>Quero receber a ligação</span>' + icon("arrow-right") + '</button>',
@@ -149,7 +149,7 @@
     }
 
     function consentBannerVisible() {
-        var banner = doc.querySelector(".consent-banner:not([hidden])");
+        var banner = doc.querySelector(".consent-banner:not([hidden]), .privacy-panel:not([hidden])");
         return Boolean(banner);
     }
 
